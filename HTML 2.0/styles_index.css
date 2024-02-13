@@ -53,7 +53,7 @@ article {
 
 .logo-left {
     max-width: 50%; /* Ajusta el tamaño de la imagen según sea necesario */
-    margin-right: auto; /* Alinea a la izquierda */
+    margin-top: auto; /* Alinea a la izquierda */
     display: block; /* Hace que la imagen sea un bloque para manejar el margen automáticamente */
 }
 
