@@ -48,7 +48,7 @@ article {
     position: absolute;
     top: 0;
     right: 0;
-    max-width: 28%; /* Ajusta el tamaño de la imagen según sea necesario */
+    max-width: 24%; /* Ajusta el tamaño de la imagen según sea necesario */
 }
 
 .logo-left {
