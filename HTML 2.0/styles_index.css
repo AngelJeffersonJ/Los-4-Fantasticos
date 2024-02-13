@@ -7,14 +7,14 @@ body.index {
 }
 
 header {
-    background-color: #5acfcb; /* Verde suave */
+    background-color: #2ecc71; /* Verde suave */
     color: #fff;
     padding: 1em;
     text-align: center;
 }
 
 nav {
-    background-color: #5acfcb; /* Verde más oscuro */
+    background-color: #2ecc71; /* Verde más oscuro */
     margin-top: 1em;
 }
 
@@ -58,7 +58,7 @@ article {
 }
 
 footer {
-    background-color: #5acfcb; /* Verde suave */
+    background-color: #2ecc71; /* Verde suave */
     color: #fff;
     text-align:  justify;
     padding: 1em;
