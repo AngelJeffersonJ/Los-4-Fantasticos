@@ -51,6 +51,12 @@ article {
     max-width: 28%; /* Ajusta el tamaño de la imagen según sea necesario */
 }
 
+.logo-left {
+    max-width: 50%; /* Ajusta el tamaño de la imagen según sea necesario */
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+    display: block; /* Hace que la imagen sea un bloque para manejar el margen automáticamente */
+}
+
 footer {
     background-color: #2ecc71; /* Verde suave */
     color: #fff;
