@@ -1,0 +1,106 @@
+/* Reset y estilos generales */
+body.evolucion {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header.evolucion {
+    background-color: #b8ae41; /* Azul suave */
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+}
+
+nav.evolucion {
+    background-color: #b8ae41; /* Azul más oscuro */
+    margin-top: 1em;
+}
+
+nav.evolucion ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+nav.evolucion a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    padding: 0.5em 1em;
+}
+
+section.evolucion {
+    padding: 2em;
+    background-color: #ecf0f1; /* Gris suave */
+}
+
+footer.evolucion {
+    background-color: #b8ae41; /* Azul suave */
+    color: #fff;
+    text-align: center;
+    padding: 1em;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+
+/* Estilos para la sección horizontal */
+.seccion-horizontal {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto; /* Permite desplazarse horizontalmente si el contenido no cabe en la pantalla */
+}
+
+/* Estilos para cada apartado dentro de la sección horizontal */
+.apartado {
+    flex: 0 0 auto; /* Hace que los apartados tengan un ancho fijo y no se estiren para ocupar todo el espacio disponible */
+    width: 300px; /* Ajusta el ancho de cada apartado según tus necesidades */
+    margin: 10px;
+    padding: 15px;
+    border: 1px solid #ddd; /* Añade un borde para separar visualmente los apartados */
+    background-color: #f9f9f9; /* Cambia el color de fondo según tus preferencias */
+}
+
+.titulo-central {
+    text-align: center;
+    margin: 20px 0; /* Ajusta el margen superior e inferior según sea necesario */
+}
+
+.titulo-central {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.justificado {
+    text-align: justify;
+}
+
+.seccion-horizontal {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+
+.apartado {
+    flex: 0 0 auto;
+    width: 300px;
+    margin: 10px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    text-align: justify; /* Ajusta el texto justificado dentro de cada apartado */
+}
+
+/* Resto de los estilos permanecen igual */
+
+.apartado img {
+    display: block;
+    margin-top: 10px; /* Ajusta el margen superior de la imagen según tus necesidades */
+    margin-bottom: 10px; /* Ajusta el margen inferior de la imagen según tus necesidades */
+    max-width: 100%; /* Asegura que la imagen no sobrepase el ancho del contenedor */
+}
+
