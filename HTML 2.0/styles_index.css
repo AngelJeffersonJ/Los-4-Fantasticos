@@ -7,14 +7,14 @@ body.index {
 }
 
 header {
-    background-color: #2ecc71; /* Verde suave */
+    background-color: #5acfcb; /* Verde suave */
     color: #fff;
     padding: 1em;
     text-align: center;
 }
 
 nav {
-    background-color: #2ecc71; /* Verde más oscuro */
+    background-color: #5acfcb; /* Verde más oscuro */
     margin-top: 1em;
 }
 
@@ -53,12 +53,12 @@ article {
 
 .logo-left {
     max-width: 50%; /* Ajusta el tamaño de la imagen según sea necesario */
-    margin-top: auto; /* Alinea a la izquierda */
+    margin: 0 auto; /* Centra la imagen horizontalmente */
     display: block; /* Hace que la imagen sea un bloque para manejar el margen automáticamente */
 }
 
 footer {
-    background-color: #2ecc71; /* Verde suave */
+    background-color: #5acfcb; /* Verde suave */
     color: #fff;
     text-align:  justify;
     padding: 1em;
