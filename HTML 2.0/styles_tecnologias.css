@@ -47,6 +47,14 @@ footer.tecnologias {
     width: 100%;
 }
 
+.box img{
+    display: block;
+    margin-top: 10px; /* Ajusta el margen superior de la imagen según tus necesidades */
+    margin-bottom: 10px; /* Ajusta el margen inferior de la imagen según tus necesidades */
+    margin: auto;
+    max-width: 75%;
+}
+
 .box{
 flex: 0 0 auto;
 width: 300px;
