@@ -70,3 +70,7 @@ text-align: justify;
     flex-wrap: nowrap;
     overflow-x: auto; /* Permite desplazarse horizontalmente si el contenido no cabe en la pantalla */
 }
+
+article.texto{
+    margin-left: 10px;
+}

@@ -104,3 +104,7 @@ footer.evolucion {
     max-width: 100%; /* Asegura que la imagen no sobrepase el ancho del contenedor */
 }
 
+p.evolucion{
+    margin-left: 12px;
+}
+

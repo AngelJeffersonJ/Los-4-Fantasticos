@@ -5,6 +5,10 @@ body.planificacion {
     padding: 0;
 }
 
+section.planificacion{
+    margin-left: 1;
+}
+
 header.planificacion {
     background-color: #df5843; /* Azul suave */
     color: #fff;
@@ -43,3 +47,33 @@ footer.planificacion {
     text-align: center;
     padding: 1em;
    
+}
+
+
+.box img{
+    display: block;
+    margin-top: 10px; /* Ajusta el margen superior de la imagen según tus necesidades */
+    margin-bottom: 10px; /* Ajusta el margen inferior de la imagen según tus necesidades */
+    margin: auto;
+    max-width: 100%;
+}
+
+.box{
+flex: 0 0 auto;
+width: 300px;
+margin: 10px;
+padding: 15px;
+border: 1px solid #ddd;
+background-color: #f9f9f9;
+text-align: justify;
+}
+
+.seccion-horizontal {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto; /* Permite desplazarse horizontalmente si el contenido no cabe en la pantalla */
+}
+
+section.texto{
+    margin-left: 10px;
+}
