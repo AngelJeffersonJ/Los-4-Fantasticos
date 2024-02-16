@@ -44,6 +44,7 @@ footer.evolucion {
     padding: 1em;
     position: fixed;
     bottom: 0;
+    left: 0;
     width: 100%;
 }
 
@@ -87,12 +88,12 @@ footer.evolucion {
 
 .apartado {
     flex: 0 0 auto;
-    width: 300px;
-    margin: 10px;
-    padding: 15px;
+    width: 350px;
+    margin: 20px;
+    padding: 10px;
     border: 1px solid #ddd;
     background-color: #f9f9f9;
-    text-align: justify; /* Ajusta el texto justificado dentro de cada apartado */
+    text-align: center; /* Ajusta el texto justificado dentro de cada apartado */
 }
 
 /* Resto de los estilos permanecen igual */
