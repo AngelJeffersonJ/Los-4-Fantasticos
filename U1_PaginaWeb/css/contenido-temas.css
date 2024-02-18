@@ -45,3 +45,16 @@ img {
     height: 300px;
     width: 400px;
 }
+
+li {
+    text-align: justify;
+    margin-left: 20px;
+}
+
+ul {
+    list-style-type: circle;
+    text-align: center;
+}
+li li {
+    list-style-type: square;
+}
