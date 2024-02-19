@@ -1,0 +1,98 @@
+/* Reset y estilos generales */
+body.tecnologias {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header.tecnologias {
+    background-color: #5f81e5; /* Azul suave */
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+}
+
+nav.tecnologias {
+    background-color: #5f81e5; /* Azul más oscuro */
+    margin-top: 1em;
+}
+
+nav.tecnologias ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+nav.tecnologias a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    padding: 0.5em 1em;
+}
+
+section.tecnologias {
+    padding: 2em;
+    background-color: #ecf0f1; /* Gris suave */
+}
+
+footer.tecnologias {
+    background-color: #5f81e5; /* Azul suave */
+    color: #fff;
+    text-align: center;
+    padding: 1em;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5%;
+}
+
+.box img{
+    display: block;
+    margin-top: 10px; /* Ajusta el margen superior de la imagen según tus necesidades */
+    margin-bottom: 10px; /* Ajusta el margen inferior de la imagen según tus necesidades */
+    margin: auto;
+    max-width: 75%;
+}
+
+.box{
+flex: 0 0 auto;
+width: 300px;
+margin: 10px;
+padding: 15px;
+border: 1px solid #ddd;
+background-color: #f9f9f9;
+text-align: justify;
+}
+
+.seccion-horizontal {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto; /* Permite desplazarse horizontalmente si el contenido no cabe en la pantalla */
+}
+
+article.texto{
+    margin-left: 10px;
+}
+
+/* Estilos para las redes sociales en el footer */
+.redes-sociales {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.redes-sociales a {
+    margin: 0 15px;
+    color: #333;
+    text-decoration: none;
+    font-size: 24px;
+    transition: color 0.3s ease-in, transform 0.2s ease-in; /* Agrega transiciones suaves */
+}
+
+.redes-sociales a:hover {
+    color: #007bff; /* Cambia el color al pasar el mouse sobre los íconos */
+    transform: scale(1.2); /* Aumenta el tamaño al pasar el mouse */
+}

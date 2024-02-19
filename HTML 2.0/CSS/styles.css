@@ -1,0 +1,48 @@
+/* Reset y estilos generales */
+body.page {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header.header {
+    background-color: #3498db; /* Azul suave */
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+}
+
+nav.nav {
+    background-color: #2980b9; /* Azul más oscuro */
+    margin-top: 1em;
+}
+
+nav.nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+nav.nav a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    padding: 0.5em 1em;
+}
+
+section.section {
+    padding: 2em;
+    background-color: #ecf0f1; /* Gris suave */
+}
+
+footer.footer {
+    background-color: #3498db; /* Azul suave */
+    color: #fff;
+    text-align: center;
+    padding: 1em;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
