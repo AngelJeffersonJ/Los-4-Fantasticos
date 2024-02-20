@@ -7,14 +7,14 @@ body.index {
 }
 
 header {
-    background-color: #2ecc71; /* Verde suave */
+    background-color: #2e0085; /* Verde suave */
     color: #fff;
     padding: 1em;
     text-align: center;
 }
 
 nav {
-    background-color: #2ecc71; /* Verde más oscuro */
+    background-color: #2e0085; /* Verde más oscuro */
     margin-top: 1em;
 }
 
@@ -36,6 +36,9 @@ nav a {
 section {
     padding: 2em;
     background-color: #ecf0f1; /* Fondo gris suave para la sección */
+    background-image:url("../Imagenes/logo_ITA.png");
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 article {
@@ -58,7 +61,7 @@ article {
 }
 
 footer {
-    background-color: #2ecc71; /* Verde suave */
+    background-color: #6300e4; /* Verde suave */
     color: #fff;
     text-align:  justify;
     padding: 1em;
@@ -76,7 +79,7 @@ footer {
 
 .redes-sociales a {
     margin: 0 15px;
-    color: #333;
+    color: #000000;
     text-decoration: none;
     font-size: 24px;
     transition: color 0.3s ease-in, transform 0.2s ease-in; /* Agrega transiciones suaves */

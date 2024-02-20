@@ -10,14 +10,14 @@ section.planificacion{
 }
 
 header.planificacion {
-    background-color: #df5843; /* Azul suave */
+    background-color: #002ca3; /* Azul suave */
     color: #fff;
     padding: 1em;
     text-align: center;
 }
 
 nav.planificacion {
-    background-color: #df5843; /* Azul más oscuro */
+    background-color:#002ca3; /* Azul más oscuro */
     margin-top: 1em;
 }
 
@@ -42,7 +42,7 @@ section.planificacion {
 }
 
 footer.planificacion {
-    background-color: #df5843; /* Azul suave */
+    background-color: #0093c0; /* Azul suave */
     color: #fff;
     text-align: center;
     padding: 1em;
@@ -76,6 +76,9 @@ text-align: justify;
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto; /* Permite desplazarse horizontalmente si el contenido no cabe en la pantalla */
+    background-image:url("../Imagenes/plan.webp");
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 section.texto{
@@ -91,7 +94,7 @@ section.texto{
 
 .redes-sociales a {
     margin: 0 15px;
-    color: #333;
+    color: #fafafa;
     text-decoration: none;
     font-size: 24px;
     transition: color 0.3s ease-in, transform 0.2s ease-in; /* Agrega transiciones suaves */

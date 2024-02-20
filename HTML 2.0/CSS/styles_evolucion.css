@@ -6,14 +6,14 @@ body.evolucion {
 }
 
 header.evolucion {
-    background-color: #b8ae41; /* Azul suave */
+    background-color: #000000; /* Azul suave */
     color: #fff;
     padding: 1em;
     text-align: center;
 }
 
 nav.evolucion {
-    background-color: #b8ae41; /* Azul más oscuro */
+    background-color: #050000; /* Azul más oscuro */
     margin-top: 1em;
 }
 
@@ -35,10 +35,13 @@ nav.evolucion a {
 section.evolucion {
     padding: 2em;
     background-color: #ecf0f1; /* Gris suave */
+    background-image:url("../Imagenes/evo.jpg");
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 footer.evolucion {
-    background-color: #b8ae41; /* Azul suave */
+    background-color: #040035; /* Azul suave */
     color: #fff;
     text-align: center;
     padding: 1em;
@@ -118,7 +121,7 @@ p.evolucion{
 
 .redes-sociales a {
     margin: 0 15px;
-    color: #333;
+    color: #fffafa;
     text-decoration: none;
     font-size: 24px;
     transition: color 0.3s ease-in, transform 0.2s ease-in; /* Agrega transiciones suaves */

@@ -35,6 +35,8 @@ nav.tecnologias a {
 section.tecnologias {
     padding: 2em;
     background-color: #ecf0f1; /* Gris suave */
+
+    
 }
 
 footer.tecnologias {
@@ -71,6 +73,9 @@ text-align: justify;
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto; /* Permite desplazarse horizontalmente si el contenido no cabe en la pantalla */
+    background-image:url("../Imagenes/tecn.avif");
+    background-attachment: fixed;
+    background-size: cover;  
 }
 
 article.texto{
@@ -86,7 +91,7 @@ article.texto{
 
 .redes-sociales a {
     margin: 0 15px;
-    color: #333;
+    color: #fffafa;
     text-decoration: none;
     font-size: 24px;
     transition: color 0.3s ease-in, transform 0.2s ease-in; /* Agrega transiciones suaves */
