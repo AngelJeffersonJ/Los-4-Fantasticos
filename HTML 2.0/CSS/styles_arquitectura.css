@@ -3,6 +3,7 @@ body.arquitectura {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color:#69b1b1
 }
 
 header.arquitectura {
@@ -39,7 +40,7 @@ section.arquitectura {
 }
 
 footer.arquitectura {
-    background-color: #328334;
+    background-color: #005353;
     color: #fff;
     text-align: center;
     padding: 1em;

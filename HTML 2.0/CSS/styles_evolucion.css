@@ -3,6 +3,8 @@ body.evolucion {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #d1daf2;
+    text-align: justify;
 }
 
 header.evolucion {
@@ -67,6 +69,7 @@ footer.evolucion {
     padding: 15px;
     border: 1px solid #ddd; /* Añade un borde para separar visualmente los apartados */
     background-color: #f9f9f9; /* Cambia el color de fondo según tus preferencias */
+    text-align: justify;
 }
 
 .titulo-central {
@@ -96,7 +99,7 @@ footer.evolucion {
     padding: 10px;
     border: 1px solid #ddd;
     background-color: #f9f9f9;
-    text-align: center; /* Ajusta el texto justificado dentro de cada apartado */
+    text-align: justify; /* Ajusta el texto justificado dentro de cada apartado */
 }
 
 /* Resto de los estilos permanecen igual */
