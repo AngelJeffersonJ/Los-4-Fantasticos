@@ -1,3 +1,24 @@
 div.container{
     border: #000 solid 2px;
 }
+
+/* Estilo para las imágenes dentro de las tarjetas */
+.card-img-top {
+    width: 150px; /* Tamaño de ancho deseado, ajusta según tu preferencia */
+    height: auto; /* Mantén la proporción original de la imagen */
+    border-radius: 5cm; /* Bordes redondeados, ajusta según tu preferencia */
+}
+
+/* Estilo para las tarjetas */
+.card {
+    width: 100px; /* Tamaño de ancho de la tarjeta, ajusta según tu preferencia */
+    border: 3px solid #ddd; /* Borde de la tarjeta, ajusta según tu preferencia */
+    border-radius: 8px; /* Bordes redondeados, ajusta según tu preferencia */
+    margin: 10px; /* Espaciado entre tarjetas, ajusta según tu preferencia */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra, ajusta según tu preferencia */
+}
+
+/* Opcional: Alinea el grupo de tarjetas al centro */
+.card-group {
+    display: flex;
+    justify-content: center;
