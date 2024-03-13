@@ -1,0 +1,23 @@
+$(document).ready(function() {
+    $('#myForm').submit(function(event) {
+        event.preventDefault();
+        
+        // Obtener los valores del formulario
+        const email = $('#email').val();
+        const password = $('#password').val();
+
+        // Validar la contraseña
+        if (!validatePassword(password)) {
+            alert('La contraseña debe tener al menos 8 caracteres, incluyendo caracteres especiales, números y mayúsculas.');
+            return;
+        }
+
+        // Si la validación pasa, puedes enviar el formulario
+        $(this).unbind('submit').submit();
+    });
+
+    function validatePassword(password) {
+        // Comprueba si la contraseña tiene al menos 8 caracteres, un carácter especial, un número y una letra mayúscula
+        return password.length >= 8 && /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password) && /[0-9]/.test(password) && /[A-Z]/.test(password);
+    }
+});
