@@ -15,7 +15,7 @@ class ProductoController extends Controller
 
     public function create()
     {
-        return view('productos.create');
+        return view('create');
     }
 
     public function store(Request $request)
@@ -27,12 +27,12 @@ class ProductoController extends Controller
         ]);
 
         Producto::create($request->all());
-        return redirect()->route('productos.index');
+        return redirect()->route('index');
     }
 
     public function edit(Producto $producto)
     {
-        return view('productos.edit', compact('producto'));
+        return view('edit', compact('producto'));
     }
 
     public function update(Request $request, Producto $producto)
@@ -44,12 +44,12 @@ class ProductoController extends Controller
         ]);
 
         $producto->update($request->all());
-        return redirect()->route('productos.index');
+        return redirect()->route('index');
     }
 
     public function destroy(Producto $producto)
     {
         $producto->delete();
-        return redirect()->route('productos.index');
+        return redirect()->route('index');
     }
 }
