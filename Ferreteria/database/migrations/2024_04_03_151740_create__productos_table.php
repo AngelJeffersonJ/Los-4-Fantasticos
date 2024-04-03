@@ -18,7 +18,6 @@ return new class extends Migration
             $table->double('Costo');
             $table->double('Costo');
             $table->timestamps();
-    
         });
     }
 
