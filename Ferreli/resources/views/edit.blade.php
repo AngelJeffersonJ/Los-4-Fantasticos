@@ -1,88 +1,44 @@
-<?php
-
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use App\Models\Producto;
-
-class ProductoController extends Controller
-{
-    public function index()
-    {
-        // Obtener todos los productos de la base de datos
-        $productos = Producto::all();
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Producto</title>
+</head>
+<body>
+    <h1>Editar Producto</h1>
+    
+    @if ($errors->any())
+        <div>
+            <strong>¡Ups! Hubo algunos problemas con tus datos:</strong>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    
+    <form action="{{ route('productos.update', $producto) }}" method="POST">
+        @csrf
+        @method('PUT')
         
-        // Retornar la vista de la lista de productos con los datos
-        return view('index', ['productos' => $productos]);
-    }
-
-    public function create()
-    {
-        // Retornar la vista para crear un nuevo producto
-        return view('create');
-    }
-
-    public function store(Request $request)
-    {
-        // Validar los datos del formulario
-        $request->validate([
-            'nombre' => 'required|string|max:255',
-            'precio' => 'required|numeric|min:0',
-            'descripcion' => 'nullable|string',
-            // Agrega aquí más reglas de validación según tus necesidades
-        ]);
-
-        // Crear un nuevo objeto Producto con los datos del formulario
-        $producto = new Producto();
-        $producto->nombre = $request->input('nombre');
-        $producto->precio = $request->input('precio');
-        $producto->descripcion = $request->input('descripcion');
-        // Guardar el nuevo producto en la base de datos
-        $producto->save();
-
-        // Redireccionar a la página de lista de productos
-        return redirect()->route('productos.index');
-    }
-
-    public function edit(Producto $producto)
-    {
-        // Retornar la vista para editar un producto con los datos del producto seleccionado
-        return view('edit', ['producto' => $producto]);
-    }
-
-    public function update(Request $request, Producto $producto)
-    {
-        // Validar los datos del formulario
-        $request->validate([
-            'nombre' => 'required|string|max:255',
-            'precio' => 'required|numeric|min:0',
-            'descripcion' => 'nullable|string',
-            // Agrega aquí más reglas de validación según tus necesidades
-        ]);
-
-        // Actualizar los datos del producto con los datos del formulario
-        $producto->nombre = $request->input('nombre');
-        $producto->precio = $request->input('precio');
-        $producto->descripcion = $request->input('descripcion');
-        // Guardar los cambios en la base de datos
-        $producto->save();
-
-        // Redireccionar a la página de lista de productos
-        return redirect()->route('productos.index');
-    }
-
-    public function destroy(Producto $producto)
-    {
-        // Eliminar el producto de la base de datos
-        $producto->delete();
-
-        // Redireccionar a la página de lista de productos
-        return redirect()->route('productos.index');
-    }
-
-    public function show(Producto $producto)
-    {
-        // Retornar la vista para mostrar los detalles de un producto
-        return view('productos.show', ['producto' => $producto]);
-    }
-}
+        <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" value="{{ old('nombre', $producto->nombre) }}">
+        </div>
+        
+        <div>
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" name="descripcion">{{ old('descripcion', $producto->descripcion) }}</textarea>
+        </div>
+        
+        <div>
+            <label for="precio">Precio:</label>
+            <input type="number" id="precio" name="precio" value="{{ old('precio', $producto->precio) }}">
+        </div>
+        
+        <button type="submit">Guardar Cambios</button>
+    </form>
+</body>
+</html>
