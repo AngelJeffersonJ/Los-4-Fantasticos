@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('inventario', function (Blueprint $table) {
+        Schema::create('inventarios', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('ID_producto');
-            $table->integer('stock');
-            $table->foreign('ID_producto')->references('id')->on('productos');
+            $table->foreignId('id_producto')->constrained('productos');
+            $table->integer('cantidad_disponible');
+            $table->integer('cantidad_minima');
+            $table->integer('cantidad_maxima');
             $table->timestamps();
-        });
+        });        
+        
     }
 
     /**
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('inventario');
+        Schema::dropIfExists('productos');
     }
 };
