@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('cantidad_minima');
             $table->integer('cantidad_maxima');
             $table->timestamps();
-        });
+        });        
         
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('inventarios');
+        Schema::dropIfExists('productos');
     }
 };
