@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('venta', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('ID_cliente');
+            $table->unsignedBigInteger('ID_empleado');
+            $table->dateTime('fecha');
+            $table->decimal('total', 10, 2);
+            $table->foreign('ID_cliente')->references('id')->on('clientes');
+            $table->foreign('ID_empleado')->references('id')->on('empleados');
             $table->timestamps();
+
+
         });
     }
 

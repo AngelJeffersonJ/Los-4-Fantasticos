@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('venta_detalle', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('ID_venta');
+            $table->unsignedBigInteger('ID_producto');
+            $table->integer('cantidad');
+            $table->decimal('precio_unitario', 8, 2);
+            $table->decimal('subtotal', 10, 2);
+            $table->foreign('ID_venta')->references('id')->on('venta');
+            $table->foreign('ID_producto')->references('id')->on('productos');
             $table->timestamps();
+
         });
     }
 
