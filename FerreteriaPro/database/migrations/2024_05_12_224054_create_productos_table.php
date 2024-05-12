@@ -15,14 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->text('descripcion')->nullable();
-            $table->decimal('precio', 8, 2);
+            $table->decimal('precio_unitario', 10, 2);
             $table->integer('stock');
-            $table->unsignedBigInteger('ID_categoria');
-            $table->unsignedBigInteger('ID_proveedor');
-            $table->foreign('ID_categoria')->references('id')->on('categoria');
-            $table->foreign('ID_proveedor')->references('id')->on('proveedores');
+            $table->foreignId('id_categoria')->constrained('categorias');
+            $table->foreignId('id_proveedor')->constrained('proveedores');
             $table->timestamps();
         });
+        
     }
 
     /**
