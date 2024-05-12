@@ -15,3 +15,4 @@ class Inventario extends Model
     }
 }
 
+

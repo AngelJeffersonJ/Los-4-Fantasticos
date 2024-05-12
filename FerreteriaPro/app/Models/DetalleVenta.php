@@ -4,19 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Producto extends Model
+class DetalleVenta extends Model
 {
-    protected $table = 'productos';
-    protected $primaryKey = 'ID_Producto';
+    protected $table = 'venta_detalle';
+    protected $primaryKey = 'ID_DetalleVenta';
     
-    public function categoria()
+    public function venta()
     {
-        return $this->belongsTo(Categoria::class, 'ID_Categoria', 'id');
+        return $this->belongsTo(Venta::class, 'ID_Venta', 'id');
     }
-    
-    public function proveedor()
+
+    public function producto()
     {
-        return $this->belongsTo(Proveedor::class, 'ID_Proveedor', 'id');
+        return $this->belongsTo(Producto::class, 'ID_Producto', 'id');
     }
 }
 
