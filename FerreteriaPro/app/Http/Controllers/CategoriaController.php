@@ -15,7 +15,7 @@ class CategoriaController extends Controller
 
     public function create()
     {
-        return view('categorias.create');
+        return view('create');
     }
 
     public function store(Request $request)
@@ -25,17 +25,17 @@ class CategoriaController extends Controller
         ]);
 
         Categoria::create($request->all());
-        return redirect()->route('categorias.index')->with('success', 'Categoría creada exitosamente.');
+        return redirect()->route('index')->with('success', 'Categoría creada exitosamente.');
     }
 
     public function show(Categoria $categoria)
     {
-        return view('categorias.show', compact('categoria'));
+        return view('show', compact('categoria'));
     }
 
     public function edit(Categoria $categoria)
     {
-        return view('categorias.edit', compact('categoria'));
+        return view('edit', compact('categoria'));
     }
 
     public function update(Request $request, Categoria $categoria)
@@ -45,12 +45,12 @@ class CategoriaController extends Controller
         ]);
 
         $categoria->update($request->all());
-        return redirect()->route('categorias.index')->with('success', 'Categoría actualizada exitosamente.');
+        return redirect()->route('index')->with('success', 'Categoría actualizada exitosamente.');
     }
 
     public function destroy(Categoria $categoria)
     {
         $categoria->delete();
-        return redirect()->route('categorias.index')->with('success', 'Categoría eliminada exitosamente.');
+        return redirect()->route('index')->with('success', 'Categoría eliminada exitosamente.');
     }
 }

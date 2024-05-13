@@ -13,11 +13,6 @@ class ProductoController extends Controller
         return view('productos.index', compact('productos'));
     }
 
-    public function create()
-    {
-        return view('productos.index');
-    }
-
     public function store(Request $request)
     {
         $request->validate([
@@ -25,6 +20,8 @@ class ProductoController extends Controller
             'descripcion' => 'nullable',
             'precio_unitario' => 'required|numeric',
             'stock' => 'required|integer',
+            'id_categoria' => 'required|exists:categorias,id',
+            'id_proveedor' => 'required|exists:proveedores,id',
         ]);
 
         Producto::create($request->all());
@@ -43,6 +40,8 @@ class ProductoController extends Controller
             'descripcion' => 'nullable',
             'precio_unitario' => 'required|numeric',
             'stock' => 'required|integer',
+            'id_categoria' => 'required|exists:categorias,id',
+            'id_proveedor' => 'required|exists:proveedores,id',
         ]);
 
         $producto->update($request->all());
