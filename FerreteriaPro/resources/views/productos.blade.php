@@ -1,62 +1,46 @@
-<?php
+@extends('layouts.app')
 
-namespace App\Http\Controllers;
+@section('content')
+    <div class="container">
+        <h1>Listado de Productos</h1>
 
-use App\Models\Producto;
-use Illuminate\Http\Request;
+        <a href="{{ route('productos.create') }}" class="btn btn-primary mb-3">Crear Producto</a>
 
-class ProductoController extends Controller
-{
-    public function index()
-    {
-        $productos = Producto::all();
-        return view('productos.index', compact('productos'));
-    }
-
-    public function create()
-    {
-        return view('productos.create');
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'nombre' => 'required',
-            'descripcion' => 'nullable',
-            'precio_unitario' => 'required|numeric',
-            'stock' => 'required|integer',
-        ]);
-
-        Producto::create($request->all());
-        return redirect()->route('productos.index')->with('success', 'Producto creado exitosamente.');
-    }
-
-    public function show(Producto $producto)
-    {
-        return view('productos.show', compact('producto'));
-    }
-
-    public function edit(Producto $producto)
-    {
-        return view('productos.edit', compact('producto'));
-    }
-
-    public function update(Request $request, Producto $producto)
-    {
-        $request->validate([
-            'nombre' => 'required',
-            'descripcion' => 'nullable',
-            'precio_unitario' => 'required|numeric',
-            'stock' => 'required|integer',
-        ]);
-
-        $producto->update($request->all());
-        return redirect()->route('productos.index')->with('success', 'Producto actualizado exitosamente.');
-    }
-
-    public function destroy(Producto $producto)
-    {
-        $producto->delete();
-        return redirect()->route('productos.index')->with('success', 'Producto eliminado exitosamente.');
-    }
-}
+        @if ($productos->isEmpty())
+            <p>No hay productos registrados.</p>
+        @else
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio Unitario</th>
+                        <th>Stock</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($productos as $producto)
+                        <tr>
+                            <td>{{ $producto->id }}</td>
+                            <td>{{ $producto->nombre }}</td>
+                            <td>{{ $producto->descripcion ?: 'N/A' }}</td>
+                            <td>{{ $producto->precio_unitario }}</td>
+                            <td>{{ $producto->stock }}</td>
+                            <td>
+                                <a href="{{ route('productos.show', $producto->id) }}" class="btn btn-info btn-sm">Ver</a>
+                                <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-primary btn-sm">Editar</a>
+                                <form action="{{ route('productos.destroy', $producto->id) }}" method="POST" style="display: inline-block;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar este producto?')">Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @endif
+    </div>
+@endsection
