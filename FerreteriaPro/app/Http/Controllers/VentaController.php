@@ -11,12 +11,12 @@ class VentaController extends Controller
     public function index()
     {
         $ventas = Venta::all();
-        return view('ventas.index', compact('ventas'));
+        return view('ventas', compact('ventas'));
     }
 
     public function create()
     {
-        return view('ventas.create');
+        return view('ventas');
     }
 
     public function store(Request $request)
@@ -40,17 +40,17 @@ class VentaController extends Controller
             ]);
         }
 
-        return redirect()->route('ventas.index')->with('success', 'Venta creada exitosamente.');
+        return redirect()->route('ventas')->with('success', 'Venta creada exitosamente.');
     }
 
     public function show(Venta $venta)
     {
-        return view('ventas.show', compact('venta'));
+        return view('ventas', compact('venta'));
     }
 
     public function edit(Venta $venta)
     {
-        return view('ventas.edit', compact('venta'));
+        return view('ventas', compact('venta'));
     }
 
     public function update(Request $request, Venta $venta)
@@ -76,12 +76,12 @@ class VentaController extends Controller
             ]);
         }
 
-        return redirect()->route('ventas.index')->with('success', 'Venta actualizada exitosamente.');
+        return redirect()->route('ventas')->with('success', 'Venta actualizada exitosamente.');
     }
 
     public function destroy(Venta $venta)
     {
         $venta->delete();
-        return redirect()->route('ventas.index')->with('success', 'Venta eliminada exitosamente.');
+        return redirect()->route('ventas')->with('success', 'Venta eliminada exitosamente.');
     }
 }
