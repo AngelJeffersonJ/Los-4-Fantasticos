@@ -29,8 +29,8 @@ class ProductoController extends Controller
             'descripcion' => 'nullable',
             'precio_unitario' => 'required|numeric',
             'stock' => 'required|integer',
-            'id_categoria' => 'required|exists:categorias,id',
-            'id_proveedor' => 'required|exists:proveedores,id',
+            'id_categoria' => 'required',
+            'id_proveedor' => 'required',
         ]);
 
         Producto::create($request->all());
@@ -56,8 +56,8 @@ class ProductoController extends Controller
             'descripcion' => 'nullable',
             'precio_unitario' => 'required|numeric',
             'stock' => 'required|integer',
-            'id_categoria' => 'required|exists:categorias,id',
-            'id_proveedor' => 'required|exists:proveedores,id',
+            'id_categoria' => 'required',
+            'id_proveedor' => 'required',
         ]);
 
         $producto->update($request->all());
