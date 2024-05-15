@@ -1,14 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Lista de Productos</h1>
+<div class="container">
+    <h1 class="mb-4">Lista de Productos</h1>
     <a href="{{ route('productos.create') }}" class="btn btn-primary mb-3">Crear Producto</a>
     
     @if($productos->isEmpty())
         <p>No hay productos registrados.</p>
     @else
         <table class="table">
-            <thead>
+            <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
@@ -44,4 +45,5 @@
             </tbody>
         </table>
     @endif
+</div>
 @endsection
