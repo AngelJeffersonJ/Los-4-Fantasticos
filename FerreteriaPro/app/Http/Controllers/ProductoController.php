@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Producto;
+use Illuminate\Http\Request;
 
 class ProductoController extends Controller
 {
@@ -19,6 +19,8 @@ class ProductoController extends Controller
             'descripcion' => 'nullable',
             'precio_unitario' => 'required|numeric',
             'stock' => 'required|integer',
+            'id_categoria' => 'required|exists:categorias,id',
+            'id_proveedor' => 'required|exists:proveedores,id',
         ]);
 
         Producto::create($request->all());
@@ -37,6 +39,8 @@ class ProductoController extends Controller
             'descripcion' => 'nullable',
             'precio_unitario' => 'required|numeric',
             'stock' => 'required|integer',
+            'id_categoria' => 'required|exists:categorias,id',
+            'id_proveedor' => 'required|exists:proveedores,id',
         ]);
 
         $producto->update($request->all());
