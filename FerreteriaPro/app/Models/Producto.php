@@ -1,39 +1,30 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Models;
 
-use App\Models\Producto;
-use App\Models\Categoria; // Importar el modelo de Categoria
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class ProductoController extends Controller
+class Producto extends Model
 {
-    public function index()
+    use HasFactory;
+
+    protected $fillable = [
+        'nombre',
+        'descripcion',
+        'precio_unitario',
+        'stock',
+        'id_categoria',
+        'id_proveedor',
+    ];
+
+    public function categoria()
     {
-        $productos = Producto::all();
-        return view('productos.index', compact('productos'));
+        return $this->belongsTo(Categoria::class, 'id_categoria');
     }
 
-    public function create()
+    public function proveedor()
     {
-        $categorias = Categoria::all(); // Obtener todas las categorías
-        return view('productos.create', compact('categorias'));
+        return $this->belongsTo(Proveedor::class, 'id_proveedor');
     }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'nombre' => 'required',
-            'descripcion' => 'nullable',
-            'precio_unitario' => 'required|numeric',
-            'stock' => 'required|integer',
-            'id_categoria' => 'required', // Agregar validación para id_categoria
-            'id_proveedor' => 'required', // Agregar validación para id_proveedor
-        ]);
-
-        Producto::create($request->all());
-        return redirect()->route('productos.index')->with('success', 'Producto creado exitosamente.');
-    }
-
-    // Resto de los métodos del controlador...
 }
