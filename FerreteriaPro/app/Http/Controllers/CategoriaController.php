@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Categoria;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 
 class CategoriaController extends Controller
@@ -10,12 +10,12 @@ class CategoriaController extends Controller
     public function index()
     {
         $categorias = Categoria::all();
-        return view('categorias', compact('categorias'));
+        return view('categorias.index', compact('categorias'));
     }
 
     public function create()
     {
-        return view('create');
+        return view('categorias.create');
     }
 
     public function store(Request $request)
@@ -25,17 +25,17 @@ class CategoriaController extends Controller
         ]);
 
         Categoria::create($request->all());
-        return redirect()->route('index')->with('success', 'Categoría creada exitosamente.');
+        return redirect()->route('categorias.index')->with('success', 'Categoría creada exitosamente.');
     }
 
     public function show(Categoria $categoria)
     {
-        return view('show', compact('categoria'));
+        return view('categorias.show', compact('categoria'));
     }
 
     public function edit(Categoria $categoria)
     {
-        return view('edit', compact('categoria'));
+        return view('categorias.edit', compact('categoria'));
     }
 
     public function update(Request $request, Categoria $categoria)
@@ -45,12 +45,12 @@ class CategoriaController extends Controller
         ]);
 
         $categoria->update($request->all());
-        return redirect()->route('index')->with('success', 'Categoría actualizada exitosamente.');
+        return redirect()->route('categorias.index')->with('success', 'Categoría actualizada exitosamente.');
     }
 
     public function destroy(Categoria $categoria)
     {
         $categoria->delete();
-        return redirect()->route('index')->with('success', 'Categoría eliminada exitosamente.');
+        return redirect()->route('categorias.index')->with('success', 'Categoría eliminada exitosamente.');
     }
 }
