@@ -9,14 +9,11 @@ class Proveedor extends Model
 {
     use HasFactory;
 
+    protected $table = 'proveedores'; // Corregir el nombre de la tabla
+
     protected $fillable = [
         'nombre',
         'direccion',
-        'telefono'
+        'telefono',
     ];
-
-    public function productos()
-    {
-        return $this->hasMany(Producto::class, 'id_proveedor');
-    }
 }
