@@ -10,12 +10,7 @@ class ProductoController extends Controller
     public function index()
     {
         $productos = Producto::all();
-        return view('productos.index', compact('productos'));
-    }
-
-    public function create()
-    {
-        return view('productos.create');
+        return view('productos', compact('productos'));
     }
 
     public function store(Request $request)
@@ -28,17 +23,12 @@ class ProductoController extends Controller
         ]);
 
         Producto::create($request->all());
-        return redirect()->route('productos')->with('success', 'Producto creado exitosamente.');
-    }
-
-    public function show(Producto $producto)
-    {
-        return view('productos.show', compact('producto'));
+        return redirect()->route('productos.index')->with('success', 'Producto creado exitosamente.');
     }
 
     public function edit(Producto $producto)
     {
-        return view('productos.edit', compact('producto'));
+        return view('productos', compact('producto'));
     }
 
     public function update(Request $request, Producto $producto)
@@ -51,12 +41,12 @@ class ProductoController extends Controller
         ]);
 
         $producto->update($request->all());
-        return redirect()->route('productos')->with('success', 'Producto actualizado exitosamente.');
+        return redirect()->route('productos.index')->with('success', 'Producto actualizado exitosamente.');
     }
 
     public function destroy(Producto $producto)
     {
         $producto->delete();
-        return redirect()->route('productos')->with('success', 'Producto eliminado exitosamente.');
+        return redirect()->route('productos.index')->with('success', 'Producto eliminado exitosamente.');
     }
 }
