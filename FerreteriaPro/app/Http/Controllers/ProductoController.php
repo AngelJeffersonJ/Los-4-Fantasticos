@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Producto;
 use Illuminate\Http\Request;
+use App\Models\Producto;
 
 class ProductoController extends Controller
 {
@@ -23,11 +23,6 @@ class ProductoController extends Controller
 
         Producto::create($request->all());
         return redirect()->route('productos.index')->with('success', 'Producto creado exitosamente.');
-    }
-
-    public function show(Producto $producto)
-    {
-        return view('productos.show', compact('producto'));
     }
 
     public function edit(Producto $producto)
