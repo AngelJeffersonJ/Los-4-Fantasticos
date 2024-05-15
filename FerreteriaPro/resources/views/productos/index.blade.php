@@ -67,5 +67,5 @@
             font-size: 0.8rem;
             padding: 0.25rem 0.5rem;
         }
-    </style>
+    </style>7
 @endpush
