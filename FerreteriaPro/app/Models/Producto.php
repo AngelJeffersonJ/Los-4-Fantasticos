@@ -15,14 +15,16 @@ class Producto extends Model
         'precio_unitario',
         'stock',
         'id_categoria',
-        'id_proveedor'
+        'id_proveedor',
     ];
 
+    // Relación con la categoría
     public function categoria()
     {
         return $this->belongsTo(Categoria::class, 'id_categoria');
     }
 
+    // Relación con el proveedor
     public function proveedor()
     {
         return $this->belongsTo(Proveedor::class, 'id_proveedor');

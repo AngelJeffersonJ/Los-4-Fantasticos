@@ -15,7 +15,7 @@ class ProductoController extends Controller
 
     public function create()
     {
-        // Aquí podrías cargar las categorías y proveedores para el formulario
+        // Aquí debes enviar los datos necesarios para el formulario
         return view('productos.create');
     }
 
@@ -41,7 +41,7 @@ class ProductoController extends Controller
 
     public function edit(Producto $producto)
     {
-        // Aquí también podrías cargar las categorías y proveedores
+        // Aquí debes enviar los datos necesarios para el formulario de edición
         return view('productos.edit', compact('producto'));
     }
 
