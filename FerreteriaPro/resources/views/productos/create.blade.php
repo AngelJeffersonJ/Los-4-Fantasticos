@@ -20,6 +20,22 @@
             <label for="stock" class="form-label">Stock</label>
             <input type="number" class="form-control" id="stock" name="stock">
         </div>
-        <button type="submit" class="btn btn-success">Crear Producto</button>
+        <div class="mb-3">
+            <label for="id_categoria" class="form-label">Categoría</label>
+            <select class="form-select" id="id_categoria" name="id_categoria">
+                @foreach ($categorias as $categoria)
+                    <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="id_proveedor" class="form-label">Proveedor</label>
+            <select class="form-select" id="id_proveedor" name="id_proveedor">
+                @foreach ($proveedores as $proveedor)
+                    <option value="{{ $proveedor->id }}">{{ $proveedor->nombre }}</option>
+                @endforeach
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Crear Producto</button>
     </form>
 @endsection
