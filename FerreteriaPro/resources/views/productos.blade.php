@@ -1,65 +1,77 @@
+<!-- resources/views/productos.blade.php -->
 @extends('layouts.app')
 
 @section('content')
-    <h1>Productos</h1>
+    <h1>Administración de Productos</h1>
 
-    @if ($message = Session::get('success'))
+    <!-- Mostrar mensajes de éxito o error -->
+    @if (session('success'))
         <div class="alert alert-success">
-            <p>{{ $message }}</p>
+            {{ session('success') }}
         </div>
     @endif
 
-    <table class="table table-bordered">
-        <tr>
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th>Precio Unitario</th>
-            <th>Stock</th>
-            <th>Acción</th>
-        </tr>
-        @foreach ($productos as $producto)
-        <tr>
-            <td>{{ $producto->nombre }}</td>
-            <td>{{ $producto->descripcion }}</td>
-            <td>{{ $producto->precio_unitario }}</td>
-            <td>{{ $producto->stock }}</td>
-            <td>
-                <form action="{{ route('productos.destroy',$producto->id) }}" method="POST">
-                    <a class="btn btn-primary" href="{{ route('productos.edit',$producto->id) }}">Editar</a>
+    <!-- Mostrar formulario para crear un nuevo producto -->
+    <h2>Crear Producto</h2>
+    <form action="{{ route('productos.store') }}" method="post">
+        @csrf
+        <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" name="nombre" required>
+        </div>
+        <div>
+            <label for="descripcion">Descripción:</label>
+            <textarea name="descripcion"></textarea>
+        </div>
+        <div>
+            <label for="precio_unitario">Precio Unitario:</label>
+            <input type="number" name="precio_unitario" step="0.01" required>
+        </div>
+        <div>
+            <label for="stock">Stock:</label>
+            <input type="number" name="stock" required>
+        </div>
+        <div>
+            <label for="id_categoria">Categoría:</label>
+            <select name="id_categoria" required>
+                @foreach ($categorias as $categoria)
+                    <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div>
+            <label for="id_proveedor">Proveedor:</label>
+            <select name="id_proveedor" required>
+                @foreach ($proveedores as $proveedor)
+                    <option value="{{ $proveedor->id }}">{{ $proveedor->nombre }}</option>
+                @endforeach
+            </select>
+        </div>
+        <button type="submit">Guardar</button>
+    </form>
 
+    <!-- Mostrar lista de productos -->
+    <h2>Listado de Productos</h2>
+    <ul>
+        @forelse ($productos as $producto)
+            <li>
+                <strong>ID: {{ $producto->id }}</strong>
+                <p>Nombre: {{ $producto->nombre }}</p>
+                <p>Descripción: {{ $producto->descripcion }}</p>
+                <p>Precio Unitario: ${{ $producto->precio_unitario }}</p>
+                <p>Stock: {{ $producto->stock }}</p>
+                <p>Categoría: {{ $producto->categoria->nombre }}</p>
+                <p>Proveedor: {{ $producto->proveedor->nombre }}</p>
+                <!-- Enlaces para editar y eliminar -->
+                <a href="{{ route('productos.edit', $producto->id) }}">Editar</a>
+                <form action="{{ route('productos.destroy', $producto->id) }}" method="post">
                     @csrf
                     @method('DELETE')
-
-                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                    <button type="submit">Eliminar</button>
                 </form>
-            </td>
-        </tr>
-        @endforeach
-    </table>
-
-    <form action="{{ route('productos.store') }}" method="POST">
-        @csrf
-
-        <div class="form-group">
-            <label for="nombre">Nombre:</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" required>
-        </div>
-
-        <div class="form-group">
-            <label for="descripcion">Descripción:</label>
-            <textarea class="form-control" id="descripcion" name="descripcion"></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="precio_unitario">Precio Unitario:</label>
-            <input type="number" class="form-control" id="precio_unitario" name="precio_unitario" required>
-        </div>
-
-        <div class="form-group">
-            <label for="stock">Stock:</label>
-            <input type="number" class="form-control" id="stock" name="stock" required>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Crear Producto</button>
-    </form>
+            </li>
+        @empty
+            <p>No hay productos registrados.</p>
+        @endforelse
+    </ul>
 @endsection

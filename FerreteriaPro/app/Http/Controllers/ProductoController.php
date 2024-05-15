@@ -15,6 +15,7 @@ class ProductoController extends Controller
 
     public function create()
     {
+        // Aquí podrías cargar las categorías y proveedores para el formulario
         return view('productos.create');
     }
 
@@ -25,10 +26,12 @@ class ProductoController extends Controller
             'descripcion' => 'nullable',
             'precio_unitario' => 'required|numeric',
             'stock' => 'required|integer',
+            'id_categoria' => 'required|exists:categorias,id',
+            'id_proveedor' => 'required|exists:proveedores,id',
         ]);
 
         Producto::create($request->all());
-        return redirect()->route('productos')->with('success', 'Producto creado exitosamente.');
+        return redirect()->route('productos.index')->with('success', 'Producto creado exitosamente.');
     }
 
     public function show(Producto $producto)
@@ -38,7 +41,8 @@ class ProductoController extends Controller
 
     public function edit(Producto $producto)
     {
-        return view('productos', compact('producto'));
+        // Aquí también podrías cargar las categorías y proveedores
+        return view('productos.edit', compact('producto'));
     }
 
     public function update(Request $request, Producto $producto)
@@ -48,6 +52,8 @@ class ProductoController extends Controller
             'descripcion' => 'nullable',
             'precio_unitario' => 'required|numeric',
             'stock' => 'required|integer',
+            'id_categoria' => 'required|exists:categorias,id',
+            'id_proveedor' => 'required|exists:proveedores,id',
         ]);
 
         $producto->update($request->all());
