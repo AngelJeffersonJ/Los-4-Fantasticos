@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Producto;
+use App\Models\Categoria;
+use App\Models\Proveedor;
 use Illuminate\Http\Request;
 
 class ProductoController extends Controller
@@ -10,13 +12,9 @@ class ProductoController extends Controller
     public function index()
     {
         $productos = Producto::all();
-        return view('productos', compact('productos'));
-    }
-
-    public function create()
-    {
-        // Aquí debes enviar los datos necesarios para el formulario
-        return view('productos.create');
+        $categorias = Categoria::all();
+        $proveedores = Proveedor::all();
+        return view('productos', compact('productos', 'categorias', 'proveedores'));
     }
 
     public function store(Request $request)
@@ -32,17 +30,6 @@ class ProductoController extends Controller
 
         Producto::create($request->all());
         return redirect()->route('productos.index')->with('success', 'Producto creado exitosamente.');
-    }
-
-    public function show(Producto $producto)
-    {
-        return view('productos.show', compact('producto'));
-    }
-
-    public function edit(Producto $producto)
-    {
-        // Aquí debes enviar los datos necesarios para el formulario de edición
-        return view('productos.edit', compact('producto'));
     }
 
     public function update(Request $request, Producto $producto)
