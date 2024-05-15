@@ -47,3 +47,8 @@
     @endif
 </div>
 @endsection
+
+@push('styles')
+    <!-- Incluye los archivos CSS de Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+@endpush
