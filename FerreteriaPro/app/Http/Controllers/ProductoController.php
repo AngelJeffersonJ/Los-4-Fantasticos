@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\Categoria;
 use App\Models\Proveedor;
-use Illuminate\Http\Request;
 
 class ProductoController extends Controller
 {
     public function index()
     {
-        $productos = Producto::with('categoria', 'proveedor')->get();
+        $productos = Producto::all();
         return view('productos.index', compact('productos'));
     }
 
@@ -34,6 +34,7 @@ class ProductoController extends Controller
         ]);
 
         Producto::create($request->all());
+
         return redirect()->route('productos.index')->with('success', 'Producto creado exitosamente.');
     }
 
@@ -61,6 +62,7 @@ class ProductoController extends Controller
         ]);
 
         $producto->update($request->all());
+
         return redirect()->route('productos.index')->with('success', 'Producto actualizado exitosamente.');
     }
 
