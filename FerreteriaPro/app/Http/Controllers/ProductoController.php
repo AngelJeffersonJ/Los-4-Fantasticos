@@ -10,12 +10,7 @@ class ProductoController extends Controller
     public function index()
     {
         $productos = Producto::all();
-        return view('productos');
-    }
-
-    public function create()
-    {
-        return view('productos');
+        return view('productos')->with('productos', $productos);
     }
 
     public function store(Request $request)
@@ -25,6 +20,8 @@ class ProductoController extends Controller
             'descripcion' => 'nullable',
             'precio_unitario' => 'required|numeric',
             'stock' => 'required|integer',
+            'id_categoria' => 'required|exists:categorias,id',
+            'id_proveedor' => 'required|exists:proveedores,id',
         ]);
 
         Producto::create($request->all());
@@ -33,12 +30,12 @@ class ProductoController extends Controller
 
     public function show(Producto $producto)
     {
-        return view('productos');
+        return view('productos')->with('producto', $producto);
     }
 
     public function edit(Producto $producto)
     {
-        return view('productos');
+        return view('productos')->with('producto', $producto);
     }
 
     public function update(Request $request, Producto $producto)
@@ -48,6 +45,8 @@ class ProductoController extends Controller
             'descripcion' => 'nullable',
             'precio_unitario' => 'required|numeric',
             'stock' => 'required|integer',
+            'id_categoria' => 'required|exists:categorias,id',
+            'id_proveedor' => 'required|exists:proveedores,id',
         ]);
 
         $producto->update($request->all());
