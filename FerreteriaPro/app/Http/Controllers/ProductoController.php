@@ -25,7 +25,7 @@ class ProductoController extends Controller
         ]);
 
         Producto::create($request->all());
-        return redirect()->route('productos.index')->with('success', 'Producto creado exitosamente.');
+        return redirect()->route('productos')->with('success', 'Producto creado exitosamente.');
     }
 
     public function show(Producto $producto)
@@ -50,12 +50,12 @@ class ProductoController extends Controller
         ]);
 
         $producto->update($request->all());
-        return redirect()->route('productos.index')->with('success', 'Producto actualizado exitosamente.');
+        return redirect()->route('productos')->with('success', 'Producto actualizado exitosamente.');
     }
 
     public function destroy(Producto $producto)
     {
         $producto->delete();
-        return redirect()->route('productos.index')->with('success', 'Producto eliminado exitosamente.');
+        return redirect()->route('productos')->with('success', 'Producto eliminado exitosamente.');
     }
 }
