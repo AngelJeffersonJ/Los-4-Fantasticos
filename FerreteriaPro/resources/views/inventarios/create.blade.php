@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Registrar Nuevo Inventario</h1>
+    <h1>Crear Nuevo Inventario</h1>
     <form action="{{ route('inventarios.store') }}" method="POST">
         @csrf
         <div class="mb-3">
             <label for="id_producto" class="form-label">Producto</label>
-            <select class="form-select" id="id_producto" name="id_producto">
+            <select name="id_producto" id="id_producto" class="form-select">
                 @foreach ($productos as $producto)
                     <option value="{{ $producto->id }}">{{ $producto->nombre }}</option>
                 @endforeach
@@ -24,6 +24,6 @@
             <label for="cantidad_maxima" class="form-label">Cantidad Máxima</label>
             <input type="number" class="form-control" id="cantidad_maxima" name="cantidad_maxima">
         </div>
-        <button type="submit" class="btn btn-primary">Registrar</button>
+        <button type="submit" class="btn btn-primary">Crear Inventario</button>
     </form>
 @endsection
