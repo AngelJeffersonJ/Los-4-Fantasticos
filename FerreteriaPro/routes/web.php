@@ -50,4 +50,10 @@ Route::resource('ventas', VentaController::class);
 Route::resource('venta_detalles', VentaDetalleController::class);
 
 // Rutas para el controlador de Inventario
-Route::resource('inventario', InventarioController::class);
+Route::get('/inventarios', [InventarioController::class, 'index'])->name('inventarios.index');
+Route::get('/inventarios/create', [InventarioController::class, 'create'])->name('inventarios.create');
+Route::post('/inventarios', [InventarioController::class, 'store'])->name('inventarios.store');
+Route::get('/inventarios/{inventario}', [InventarioController::class, 'show'])->name('inventarios.show');
+Route::get('/inventarios/{inventario}/edit', [InventarioController::class, 'edit'])->name('inventarios.edit');
+Route::put('/inventarios/{inventario}', [InventarioController::class, 'update'])->name('inventarios.update');
+Route::delete('/inventarios/{inventario}', [InventarioController::class, 'destroy'])->name('inventarios.destroy');
