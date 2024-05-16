@@ -7,6 +7,7 @@ use App\Models\Venta;
 
 class VentaDetalle extends Model
 {
+    protected $table = 'venta_detalles';
     protected $fillable = [
         'id_venta',
         'id_producto',
