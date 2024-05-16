@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categoria;
 use Illuminate\Http\Request;
+use App\Models\Categoria;
 
-class CategoriaController extends Controller
+class CategoriasController extends Controller
 {
     public function index()
     {
@@ -21,11 +21,13 @@ class CategoriaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => 'required|unique:categorias',
+            'nombre' => 'required|string|max:255|unique:categorias',
         ]);
 
         Categoria::create($request->all());
-        return redirect()->route('categorias.index')->with('success', 'Categoría creada exitosamente.');
+
+        return redirect()->route('categorias.index')
+                         ->with('success','Categoría creada exitosamente.');
     }
 
     public function show(Categoria $categoria)
@@ -41,16 +43,20 @@ class CategoriaController extends Controller
     public function update(Request $request, Categoria $categoria)
     {
         $request->validate([
-            'nombre' => 'required|unique:categorias,nombre,'.$categoria->id,
+            'nombre' => 'required|string|max:255|unique:categorias,nombre,'.$categoria->id,
         ]);
 
         $categoria->update($request->all());
-        return redirect()->route('categorias.index')->with('success', 'Categoría actualizada exitosamente.');
+
+        return redirect()->route('categorias.index')
+                         ->with('success','Categoría actualizada exitosamente.');
     }
 
     public function destroy(Categoria $categoria)
     {
         $categoria->delete();
-        return redirect()->route('categorias.index')->with('success', 'Categoría eliminada exitosamente.');
+
+        return redirect()->route('categorias.index')
+                         ->with('success','Categoría eliminada exitosamente.');
     }
 }
