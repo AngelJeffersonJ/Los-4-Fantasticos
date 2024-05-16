@@ -47,7 +47,13 @@ Route::delete('/clientes/{cliente}', [ClienteController::class, 'destroy'])->nam
 Route::resource('ventas', VentaController::class);
 
 // Rutas para el controlador de Detalle de Venta
-Route::resource('venta_detalles', VentaDetalleController::class);
+Route::get('venta_detalles', [VentaDetalleController::class, 'index'])->name('venta_detalles.index');
+Route::get('venta_detalles/create', [VentaDetalleController::class, 'create'])->name('venta_detalles.create');
+Route::post('venta_detalles', [VentaDetalleController::class, 'store'])->name('venta_detalles.store');
+Route::get('venta_detalles/{venta_detalle}', [VentaDetalleController::class, 'show'])->name('venta_detalles.show');
+Route::get('venta_detalles/{venta_detalle}/edit', [VentaDetalleController::class, 'edit'])->name('venta_detalles.edit');
+Route::put('venta_detalles/{venta_detalle}', [VentaDetalleController::class, 'update'])->name('venta_detalles.update');
+Route::delete('venta_detalles/{venta_detalle}', [VentaDetalleController::class, 'destroy'])->name('venta_detalles.destroy');
 
 // Rutas para el controlador de Inventario
 Route::get('/inventarios', [InventarioController::class, 'index'])->name('inventarios.index');
