@@ -1,22 +1,27 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class VentaDetalle extends Model
 {
+    protected $table = 'venta_detalles';
+
     protected $fillable = [
-        'id_venta', 'id_producto', 'cantidad', 'precio_unitario'
+        'id_venta',
+        'id_producto',
+        'cantidad',
+        'precio_unitario',
     ];
 
     public function venta()
     {
-        return $this->belongsTo('App\Venta', 'id_venta');
+        return $this->belongsTo(Venta::class, 'id_venta');
     }
 
     public function producto()
     {
-        return $this->belongsTo('App\Producto', 'id_producto');
+        return $this->belongsTo(Producto::class, 'id_producto');
     }
 }
