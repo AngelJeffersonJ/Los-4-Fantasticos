@@ -2,27 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\VentaDetalle;
 use Illuminate\Http\Request;
+use App\Models\VentaDetalle;
+use App\Models\Venta;
+use App\Models\Producto;
 
 class VentaDetalleController extends Controller
 {
     public function index()
     {
-        $detalles = VentaDetalle::all();
-        return view('venta_detalles.index', compact('detalles'));
+        $ventaDetalles = VentaDetalle::all();
+        return view('venta_detalles.index', compact('ventaDetalles'));
     }
 
     public function create()
     {
-        return view('venta_detalles.create');
+        $ventas = Venta::all();
+        $productos = Producto::all();
+        return view('venta_detalles.create', compact('ventas', 'productos'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'venta_id' => 'required|exists:ventas,id',
-            'producto_id' => 'required|exists:productos,id',
+            'id_venta' => 'required|exists:ventas,id',
+            'id_producto' => 'required|exists:productos,id',
             'cantidad' => 'required|integer|min:1',
             'precio_unitario' => 'required|numeric|min:0',
         ]);
@@ -31,32 +35,34 @@ class VentaDetalleController extends Controller
         return redirect()->route('venta_detalles.index')->with('success', 'Detalle de venta creado exitosamente.');
     }
 
-    public function show(VentaDetalle $detalle)
+    public function show(VentaDetalle $ventaDetalle)
     {
-        return view('venta_detalles.show', compact('detalle'));
+        return view('venta_detalles.show', compact('ventaDetalle'));
     }
 
-    public function edit(VentaDetalle $detalle)
+    public function edit(VentaDetalle $ventaDetalle)
     {
-        return view('venta_detalles.edit', compact('detalle'));
+        $ventas = Venta::all();
+        $productos = Producto::all();
+        return view('venta_detalles.edit', compact('ventaDetalle', 'ventas', 'productos'));
     }
 
-    public function update(Request $request, VentaDetalle $detalle)
+    public function update(Request $request, VentaDetalle $ventaDetalle)
     {
         $request->validate([
-            'venta_id' => 'required|exists:ventas,id',
-            'producto_id' => 'required|exists:productos,id',
+            'id_venta' => 'required|exists:ventas,id',
+            'id_producto' => 'required|exists:productos,id',
             'cantidad' => 'required|integer|min:1',
             'precio_unitario' => 'required|numeric|min:0',
         ]);
 
-        $detalle->update($request->all());
+        $ventaDetalle->update($request->all());
         return redirect()->route('venta_detalles.index')->with('success', 'Detalle de venta actualizado exitosamente.');
     }
 
-    public function destroy(VentaDetalle $detalle)
+    public function destroy(VentaDetalle $ventaDetalle)
     {
-        $detalle->delete();
+        $ventaDetalle->delete();
         return redirect()->route('venta_detalles.index')->with('success', 'Detalle de venta eliminado exitosamente.');
     }
 }
