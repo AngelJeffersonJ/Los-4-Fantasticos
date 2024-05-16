@@ -30,17 +30,19 @@ class ProveedorController extends Controller
         return redirect()->route('proveedores.index')->with('success', 'Proveedor creado exitosamente.');
     }
 
-    public function show(Proveedor $proveedor)
+    public function show($id)
     {
+        $proveedor = Proveedor::findOrFail($id);
         return view('proveedores.show', compact('proveedor'));
     }
 
-    public function edit(Proveedor $proveedor)
+    public function edit($id)
     {
+        $proveedor = Proveedor::findOrFail($id);
         return view('proveedores.edit', compact('proveedor'));
     }
 
-    public function update(Request $request, Proveedor $proveedor)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'nombre' => 'required',
@@ -48,13 +50,17 @@ class ProveedorController extends Controller
             'telefono' => 'required',
         ]);
 
+        $proveedor = Proveedor::findOrFail($id);
         $proveedor->update($request->all());
+
         return redirect()->route('proveedores.index')->with('success', 'Proveedor actualizado exitosamente.');
     }
 
-    public function destroy(Proveedor $proveedor)
+    public function destroy($id)
     {
+        $proveedor = Proveedor::findOrFail($id);
         $proveedor->delete();
+
         return redirect()->route('proveedores.index')->with('success', 'Proveedor eliminado exitosamente.');
     }
 }
