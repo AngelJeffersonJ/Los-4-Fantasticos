@@ -1,17 +1,16 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Cliente extends Model
 {
-    protected $fillable = [
-        'nombre', 'direccion', 'telefono'
-    ];
+    protected $table = 'clientes';
 
-    public function ventas()
-    {
-        return $this->hasMany('App\Venta', 'id_cliente');
-    }
+    protected $fillable = [
+        'nombre',
+        'direccion',
+        'telefono'
+    ];
 }

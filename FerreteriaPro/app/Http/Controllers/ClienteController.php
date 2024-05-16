@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Cliente;
+use App\Models\Cliente;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
@@ -23,7 +23,7 @@ class ClienteController extends Controller
         $request->validate([
             'nombre' => 'required',
             'direccion' => 'required',
-            'telefono' => 'required',
+            'telefono' => 'required'
         ]);
 
         Cliente::create($request->all());
@@ -45,7 +45,7 @@ class ClienteController extends Controller
         $request->validate([
             'nombre' => 'required',
             'direccion' => 'required',
-            'telefono' => 'required',
+            'telefono' => 'required'
         ]);
 
         $cliente->update($request->all());
