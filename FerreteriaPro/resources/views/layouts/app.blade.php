@@ -6,10 +6,71 @@
     <title>Tu Aplicación</title>
     <!-- Agrega tus estilos CSS aquí -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+
+        header {
+            background-color: #007bff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand, .nav-link {
+            color: #fff !important;
+        }
+
+        .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar-toggler-icon {
+            filter: brightness(0) invert(1);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        main {
+            flex: 1;
+            padding: 20px 0;
+        }
+
+        footer {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+            text-align: center;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
                 <a class="navbar-brand" href="#">Tu Aplicación</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,7 +78,6 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ml-auto">
-                        <!-- Aquí puedes colocar tus enlaces de navegación -->
                         <li class="nav-item">
                             <a class="nav-link" href="#">Inicio</a>
                         </li>
@@ -36,14 +96,12 @@
         </nav>
     </header>
 
-    <main class="py-4">
-        <div class="container">
-            @yield('content')
-        </div>
+    <main class="container">
+        @yield('content')
     </main>
 
-    <footer class="footer mt-auto py-3 bg-light">
-        <div class="container text-center">
+    <footer class="footer">
+        <div class="container">
             <p>&copy; {{ date('Y') }} Tu Aplicación. Todos los derechos reservados.</p>
         </div>
     </footer>
