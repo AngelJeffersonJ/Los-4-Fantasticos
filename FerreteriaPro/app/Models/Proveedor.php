@@ -13,8 +13,8 @@ class Proveedor extends Model
         'direccion',
         'telefono'
     ];
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> 936aadf4d4c202fabaf65c5c79e0bff35f74bdd8
+
+
+
