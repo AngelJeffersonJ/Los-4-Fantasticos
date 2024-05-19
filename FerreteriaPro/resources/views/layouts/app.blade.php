@@ -6,6 +6,7 @@
     <title>Tu Aplicación</title>
     <!-- Agrega tus estilos CSS aquí -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             display: flex;
@@ -16,7 +17,7 @@
         }
 
         header {
-            background-color: #007bff;
+            background-color: #343a40;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
@@ -34,7 +35,7 @@
 
         .container {
             max-width: 900px;
-            margin: 0 auto;
+            margin: 20px auto;
             padding: 20px;
             background-color: #fff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -47,10 +48,11 @@
         }
 
         footer {
-            background-color: #f8f9fa;
+            background-color: #343a40;
             padding: 20px 0;
             text-align: center;
-            border-top: 1px solid #e9ecef;
+            color: #fff;
+            margin-top: auto;
         }
 
         .footer p {
@@ -70,7 +72,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light">
+        <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container">
                 <a class="navbar-brand" href="#">Tu Aplicación</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -108,5 +110,8 @@
 
     <!-- Agrega tus scripts JavaScript aquí -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
