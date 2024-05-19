@@ -59,6 +59,7 @@
 
         .footer p {
             margin: 0;
+            color: #ddd;
         }
 
         .btn-primary {
