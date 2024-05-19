@@ -17,7 +17,8 @@
         }
 
         header {
-            background-color: #343a40;
+            background-color: #007bff;
+            color: #fff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
@@ -49,9 +50,10 @@
 
         footer {
             background-color: #343a40;
+            color: #fff;
             padding: 20px 0;
             text-align: center;
-            color: #fff;
+            border-top: 1px solid #e9ecef;
             margin-top: auto;
         }
 
