@@ -1,17 +1,28 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Inventario extends Model
 {
+    use HasFactory;
+
+    protected $table = 'inventarios';
+
     protected $fillable = [
-        'id_producto', 'cantidad_disponible', 'cantidad_minima', 'cantidad_maxima'
+        'id_producto',
+        'cantidad_disponible',
+        'cantidad_minima',
+        'cantidad_maxima',
     ];
 
+    /**
+     * Obtener el producto asociado al inventario.
+     */
     public function producto()
     {
-        return $this->belongsTo('App\Producto', 'id_producto');
+        return $this->belongsTo(Producto::class, 'id_producto');
     }
 }
