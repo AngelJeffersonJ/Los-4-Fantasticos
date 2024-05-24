@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
+@section('title', 'Eliminar Categoría')
+
 @section('content')
-<div class="container">
+<div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -13,9 +15,7 @@
                         @csrf
                         @method('DELETE')
 
-                        <button type="submit" class="btn btn-danger mr-2">
-                            {{ __('Eliminar') }}
-                        </button>
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
                         <a href="{{ route('categorias.index') }}" class="btn btn-secondary">Cancelar</a>
                     </form>
                 </div>

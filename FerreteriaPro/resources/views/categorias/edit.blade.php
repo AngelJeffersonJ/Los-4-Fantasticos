@@ -1,7 +1,10 @@
+
 @extends('layouts.app')
 
+@section('title', 'Editar Categoría')
+
 @section('content')
-<div class="container">
+<div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -14,7 +17,7 @@
 
                         <div class="form-group">
                             <label for="nombre">{{ __('Nombre') }}</label>
-                            <input id="nombre" type="text" class="form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{ $categoria->nombre }}" required autocomplete="nombre" autofocus>
+                            <input id="nombre" type="text" class="form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre', $categoria->nombre) }}" required autocomplete="nombre" autofocus>
 
                             @error('nombre')
                                 <span class="invalid-feedback" role="alert">
@@ -23,7 +26,7 @@
                             @enderror
                         </div>
 
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary mt-3">
                             {{ __('Actualizar Categoría') }}
                         </button>
                     </form>
