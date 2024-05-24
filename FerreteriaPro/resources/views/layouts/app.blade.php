@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title') - Tu Aplicación</title>
+    <title>Tu Aplicación</title>
     <!-- Agrega tus estilos CSS aquí -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
@@ -20,7 +20,7 @@
             background-color: #007bff;
             color: #fff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 10px 0;
+            margin-bottom: 20px;
         }
 
         .navbar-brand, .nav-link {
@@ -73,9 +73,36 @@
             border-color: #004085;
         }
 
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+
         .card {
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .table {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .table th, .table td {
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        .table thead th {
+            background-color: #007bff;
+            color: #fff;
         }
 
         .navbar {
