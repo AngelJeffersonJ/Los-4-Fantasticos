@@ -18,9 +18,6 @@ class Inventario extends Model
         'cantidad_maxima',
     ];
 
-    /**
-     * Obtener el producto asociado al inventario.
-     */
     public function producto()
     {
         return $this->belongsTo(Producto::class, 'id_producto');

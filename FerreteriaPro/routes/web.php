@@ -8,6 +8,7 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\VentaController;
 use App\Http\Controllers\VentaDetalleController;
 use App\Http\Controllers\InventarioController;
+use App\Http\Controllers\CatalogoController;
 
 Route::get('/productos', [ProductoController::class, 'index'])->name('productos.index');
 Route::get('/productos/create', [ProductoController::class, 'create'])->name('productos.create');
@@ -69,3 +70,16 @@ Route::get('/inventarios/{inventario}', [InventarioController::class, 'show'])->
 Route::get('/inventarios/{inventario}/edit', [InventarioController::class, 'edit'])->name('inventarios.edit');
 Route::put('/inventarios/{inventario}', [InventarioController::class, 'update'])->name('inventarios.update');
 Route::delete('/inventarios/{inventario}', [InventarioController::class, 'destroy'])->name('inventarios.destroy');
+
+Route::get('/', [CatalogoController::class, 'index'])->name('catalogo.index');
+Route::get('/producto/{id}', [CatalogoController::class, 'show'])->name('catalogo.show');
+Route::post('/producto/{id}/agregar', [CatalogoController::class, 'agregarAlCarrito'])->name('catalogo.agregar');
+Route::get('/carrito', [CatalogoController::class, 'carrito'])->name('catalogo.carrito');
+Route::post('/comprar', [CatalogoController::class, 'comprar'])->name('catalogo.comprar');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/perfil', [UserController::class, 'perfil'])->name('user.perfil');
+    Route::post('/perfil/actualizar', [UserController::class, 'actualizarPerfil'])->name('user.actualizarPerfil');
+
+    });
+    Auth::routes();

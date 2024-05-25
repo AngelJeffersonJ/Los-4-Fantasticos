@@ -2,21 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Producto extends Model
 {
-    protected $table = 'productos';
+    use HasFactory;
 
     protected $fillable = [
-        'nombre',
-        'descripcion',
-        'precio_unitario',
-        'stock',
-        'id_categoria',
-        'id_proveedor',
-        'created_at',
-        'updated_at',
+        'nombre', 'descripcion', 'precio_unitario', 'stock', 'id_categoria', 'id_proveedor'
     ];
 
     public function categoria()
@@ -32,5 +26,10 @@ class Producto extends Model
     public function inventario()
     {
         return $this->hasOne(Inventario::class, 'id_producto');
+    }
+
+    public function ventaDetalles()
+    {
+        return $this->hasMany(VentaDetalle::class, 'id_producto');
     }
 }
