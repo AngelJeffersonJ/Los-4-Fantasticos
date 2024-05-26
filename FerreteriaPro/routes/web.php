@@ -2,13 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductoController;
-use App\Http\Controllers\CategoryController; // Usar el nuevo controlador
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\VentaController;
 use App\Http\Controllers\VentaDetalleController;
 use App\Http\Controllers\InventarioController;
 use App\Http\Controllers\CatalogoController;
+use App\Http\Controllers\UserController;
 
 Route::get('/productos', [ProductoController::class, 'index'])->name('productos.index');
 Route::get('/productos/create', [ProductoController::class, 'create'])->name('productos.create');
@@ -19,7 +20,7 @@ Route::put('/productos/{producto}', [ProductoController::class, 'update'])->name
 Route::delete('/productos/{producto}', [ProductoController::class, 'destroy'])->name('productos.destroy');
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
-Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
+Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 
 // Rutas para el controlador de Proveedor
 Route::get('/proveedores', [ProveedorController::class, 'index'])->name('proveedores.index');
@@ -80,7 +81,3 @@ Route::middleware('auth')->group(function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Rutas para el perfil
-Route::get('/perfil', [UserController::class, 'showProfile'])->name('user.perfil');
-Route::post('/perfil/actualizar', [UserController::class, 'updateProfile'])->name('user.updateProfile');
