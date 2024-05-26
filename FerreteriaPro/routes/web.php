@@ -10,6 +10,7 @@ use App\Http\Controllers\VentaDetalleController;
 use App\Http\Controllers\InventarioController;
 use App\Http\Controllers\CatalogoController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CategoriaController;
 
 Route::get('/productos', [ProductoController::class, 'index'])->name('productos.index');
 Route::get('/productos/create', [ProductoController::class, 'create'])->name('productos.create');
@@ -66,6 +67,15 @@ Route::get('/inventarios/{inventario}', [InventarioController::class, 'show'])->
 Route::get('/inventarios/{inventario}/edit', [InventarioController::class, 'edit'])->name('inventarios.edit');
 Route::put('/inventarios/{inventario}', [InventarioController::class, 'update'])->name('inventarios.update');
 Route::delete('/inventarios/{inventario}', [InventarioController::class, 'destroy'])->name('inventarios.destroy');
+
+// Rutas para el controlador de Categoria
+Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index');
+Route::get('/categorias/create', [CategoriaController::class, 'create'])->name('categorias.create');
+Route::post('/categorias', [CategoriaController::class, 'store'])->name('categorias.store');
+Route::get('/categorias/{categoria}', [CategoriaController::class, 'show'])->name('categorias.show');
+Route::get('/categorias/{categoria}/edit', [CategoriaController::class, 'edit'])->name('categorias.edit');
+Route::put('/categorias/{categoria}', [CategoriaController::class, 'update'])->name('categorias.update');
+Route::delete('/categorias/{categoria}', [CategoriaController::class, 'destroy'])->name('categorias.destroy');
 
 Route::get('/', [CatalogoController::class, 'index'])->name('catalogo.index');
 Route::get('/producto/{id}', [CatalogoController::class, 'show'])->name('catalogo.show');

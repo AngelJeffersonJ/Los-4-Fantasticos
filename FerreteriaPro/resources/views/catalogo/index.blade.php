@@ -46,7 +46,7 @@
             <h2 class="text-center"><i class="fas fa-tools"></i> Admin Links</h2>
             <ul class="text-center">
                 <li><a href="{{ route('productos.index') }}" class="btn btn-outline-info">Productos</a></li>
-                <li><a href="{{ route('categories.index') }}" class="btn btn-outline-info">Categorías</a></li>
+                <li><a href="{{ route('categorias.index') }}" class="btn btn-outline-info">Categorías</a></li>
                 <li><a href="{{ route('ventas.index') }}" class="btn btn-outline-info">Ventas</a></li>
                 <li><a href="{{ route('venta_detalles.index') }}" class="btn btn-outline-info">Ventas Detalle</a></li>
                 <li><a href="{{ route('proveedores.index') }}" class="btn btn-outline-info">Proveedores</a></li>
