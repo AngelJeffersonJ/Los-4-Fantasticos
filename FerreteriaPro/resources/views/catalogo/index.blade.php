@@ -41,6 +41,20 @@
 </div>
 
 <div class="container mt-4">
+    @if(Auth::check() && Auth::user()->role->name == 'admin')
+        <div class="admin-links">
+            <h2>Admin Links</h2>
+            <ul>
+                <li><a href="{{ route('productos.index') }}">Productos</a></li>
+                <li><a href="{{ route('categorias.index') }}">Categorías</a></li>
+                <li><a href="{{ route('ventas.index') }}">Ventas</a></li>
+                <li><a href="{{ route('venta_detalles.index') }}">Ventas Detalle</a></li>
+                <li><a href="{{ route('proveedores.index') }}">Proveedores</a></li>
+                <li><a href="{{ route('inventarios.index') }}">Inventarios</a></li>
+                <li><a href="{{ route('clientes.index') }}">Clientes</a></li>
+            </ul>
+        </div>
+    @endif
     <section class="featured-section">
         <h2>Productos Destacados</h2>
         <div class="row">
