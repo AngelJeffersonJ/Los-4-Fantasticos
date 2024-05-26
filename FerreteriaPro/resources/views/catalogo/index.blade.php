@@ -42,21 +42,21 @@
 
 <div class="container mt-4">
     @if(Auth::check() && Auth::user()->role->name == 'admin')
-        <div class="admin-links">
-            <h2>Admin Links</h2>
-            <ul>
-                <li><a href="{{ route('productos.index') }}">Productos</a></li>
-                <li><a href="{{ route('categorias.index') }}">Categorías</a></li>
-                <li><a href="{{ route('ventas.index') }}">Ventas</a></li>
-                <li><a href="{{ route('venta_detalles.index') }}">Ventas Detalle</a></li>
-                <li><a href="{{ route('proveedores.index') }}">Proveedores</a></li>
-                <li><a href="{{ route('inventarios.index') }}">Inventarios</a></li>
-                <li><a href="{{ route('clientes.index') }}">Clientes</a></li>
+        <div class="admin-links mb-4">
+            <h2 class="text-center"><i class="fas fa-tools"></i> Admin Links</h2>
+            <ul class="text-center">
+                <li><a href="{{ route('productos.index') }}" class="btn btn-outline-info">Productos</a></li>
+                <li><a href="{{ route('categories.index') }}" class="btn btn-outline-info">Categorías</a></li>
+                <li><a href="{{ route('ventas.index') }}" class="btn btn-outline-info">Ventas</a></li>
+                <li><a href="{{ route('venta_detalles.index') }}" class="btn btn-outline-info">Ventas Detalle</a></li>
+                <li><a href="{{ route('proveedores.index') }}" class="btn btn-outline-info">Proveedores</a></li>
+                <li><a href="{{ route('inventarios.index') }}" class="btn btn-outline-info">Inventarios</a></li>
+                <li><a href="{{ route('clientes.index') }}" class="btn btn-outline-info">Clientes</a></li>
             </ul>
         </div>
     @endif
     <section class="featured-section">
-        <h2>Productos Destacados</h2>
+        <h2 class="text-center mb-4"><i class="fas fa-star"></i> Productos Destacados</h2>
         <div class="row">
             @foreach($productos as $producto)
                 <div class="col-md-4">
@@ -81,36 +81,19 @@
     </section>
 
     <section class="category-section">
-        <h2>Categorías</h2>
+        <h2 class="text-center mb-4"><i class="fas fa-list"></i> Categorías</h2>
         <div class="row">
-            <!-- Aquí puedes agregar las categorías manualmente o dinámicamente -->
-            <div class="col-md-4">
-                <div class="card category-card">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Categoría 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Categoría 1</h5>
-                        <a href="#" class="btn btn-primary btn-block">Ver Productos</a>
+            @foreach($categories as $category)
+                <div class="col-md-4">
+                    <div class="card category-card mb-4">
+                        <img src="https://via.placeholder.com/300" class="card-img-top" alt="{{ $category->nombre }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $category->nombre }}</h5>
+                            <a href="{{ route('categories.show', $category->id) }}" class="btn btn-primary btn-block">Ver Productos</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card category-card">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Categoría 2">
-                    <div class="card-body">
-                        <h5 class="card-title">Categoría 2</h5>
-                        <a href="#" class="btn btn-primary btn-block">Ver Productos</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card category-card">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Categoría 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Categoría 3</h5>
-                        <a href="#" class="btn btn-primary btn-block">Ver Productos</a>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </section>
 </div>

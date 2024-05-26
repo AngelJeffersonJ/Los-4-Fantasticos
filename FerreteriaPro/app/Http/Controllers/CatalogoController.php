@@ -28,7 +28,10 @@ class CatalogoController extends Controller
                 return (object) $producto;
             });
 
-        return view('catalogo.index', compact('productos'));
+        // Consulta SQL directa para obtener las categorías
+        $categories = DB::table('categorias')->get();
+
+        return view('catalogo.index', compact('productos', 'categories'));
     }
 
     public function show($id)
@@ -119,13 +122,3 @@ class CatalogoController extends Controller
         return redirect()->route('catalogo.index')->with('success', 'Compra realizada con éxito!');
     }
 }
-
-
-
-
-
-
-
-
-
-

@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductoController;
-use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\CategoryController; // Usar el nuevo controlador
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\VentaController;
@@ -18,13 +18,8 @@ Route::get('/productos/{producto}/edit', [ProductoController::class, 'edit'])->n
 Route::put('/productos/{producto}', [ProductoController::class, 'update'])->name('productos.update');
 Route::delete('/productos/{producto}', [ProductoController::class, 'destroy'])->name('productos.destroy');
 
-Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index');
-Route::get('/categorias/create', [CategoriaController::class, 'create'])->name('categorias.create');
-Route::post('/categorias', [CategoriaController::class, 'store'])->name('categorias.store');
-Route::get('/categorias/{categoria}', [CategoriaController::class, 'show'])->name('categorias.show');
-Route::get('/categorias/{categoria}/edit', [CategoriaController::class, 'edit'])->name('categorias.edit');
-Route::put('/categorias/{categoria}', [CategoriaController::class, 'update'])->name('categorias.update');
-Route::delete('/categorias/{categoria}', [CategoriaController::class, 'destroy'])->name('categorias.destroy');
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
 
 // Rutas para el controlador de Proveedor
 Route::get('/proveedores', [ProveedorController::class, 'index'])->name('proveedores.index');
@@ -80,9 +75,12 @@ Route::post('/comprar', [CatalogoController::class, 'comprar'])->name('catalogo.
 Route::middleware('auth')->group(function () {
     Route::get('/perfil', [UserController::class, 'perfil'])->name('user.perfil');
     Route::post('/perfil/actualizar', [UserController::class, 'actualizarPerfil'])->name('user.actualizarPerfil');
+});
 
-    });
-    Auth::routes();
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Rutas para el perfil
+Route::get('/perfil', [UserController::class, 'showProfile'])->name('user.perfil');
+Route::post('/perfil/actualizar', [UserController::class, 'updateProfile'])->name('user.updateProfile');
