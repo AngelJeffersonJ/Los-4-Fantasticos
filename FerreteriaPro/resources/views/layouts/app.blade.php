@@ -12,15 +12,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
         body {
-            background-color: #e6e6e1; /* Cambia el color de fondo de toda la página */
+            background-color: #f4f4f9; /* Cambia el color de fondo de toda la página */
         }
 
         .navbar {
             background-color: #343a40;
         }
 
+        .navbar-brand img {
+            height: 40px; /* Ajusta el tamaño del logo */
+            margin-right: 10px;
+        }
+
         .navbar-brand {
             color: #ffc107 !important;
+            display: flex;
+            align-items: center;
         }
 
         .navbar-nav .nav-link {
@@ -124,6 +131,21 @@
             margin-bottom: 10px;
         }
 
+        .social-icons {
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            color: #ffc107;
+            margin: 0 10px;
+            font-size: 20px;
+            transition: color 0.2s ease-in-out;
+        }
+
+        .social-icons a:hover {
+            color: #fff;
+        }
+
         @media (max-width: 767px) {
             .navbar-nav {
                 text-align: center;
@@ -152,7 +174,9 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{ url('/') }}">FerreteriaPro</a>
+        <a class="navbar-brand" href="{{ url('/') }}">
+            <img src="{{ asset('images/logo.png') }}" alt="FerreteriaPro"> FerreteriaPro
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -218,6 +242,12 @@
                         <li class="text-white">Email: info@ferreteriapro.com</li>
                         <li class="text-white">Dirección: Calle Falsa 123, Ciudad, País</li>
                     </ul>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
