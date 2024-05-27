@@ -9,21 +9,21 @@
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img class="d-block w-100" src="https://via.placeholder.com/1200x400" alt="First slide">
+            <img class="d-block w-100" src="{{ asset('images/ferreteria1.jpg') }}" alt="First slide">
             <div class="carousel-caption d-none d-md-block">
                 <h5>Bienvenido a FerreteriaPro</h5>
                 <p>Los mejores productos a los mejores precios</p>
             </div>
         </div>
         <div class="carousel-item">
-            <img class="d-block w-100" src="https://via.placeholder.com/1200x400" alt="Second slide">
+            <img class="d-block w-100" src="{{ asset('images/ferreteria2.jpg') }}" alt="Second slide">
             <div class="carousel-caption d-none d-md-block">
                 <h5>Calidad garantizada</h5>
                 <p>Encuentra todo lo que necesitas para tus proyectos</p>
             </div>
         </div>
         <div class="carousel-item">
-            <img class="d-block w-100" src="https://via.placeholder.com/1200x400" alt="Third slide">
+            <img class="d-block w-100" src="{{ asset('images/ferreteria3.jpg') }}" alt="Third slide">
             <div class="carousel-caption d-none d-md-block">
                 <h5>Ofertas especiales</h5>
                 <p>Descuentos en productos seleccionados</p>
@@ -58,10 +58,13 @@
     <section class="featured-section">
         <h2 class="text-center mb-4"><i class="fas fa-star"></i> Productos Destacados</h2>
         <div class="row">
-            @foreach($productos as $producto)
+            @php
+                $productImages = ['producto1.jpg', 'producto2.jpg', 'producto3.jpg', 'producto4.jpg', 'producto5.jpg', 'producto6.jpg'];
+            @endphp
+            @foreach($productos as $index => $producto)
                 <div class="col-md-4">
                     <div class="card mb-4">
-                        <img src="https://via.placeholder.com/300" class="card-img-top" alt="{{ $producto->nombre }}">
+                        <img src="{{ asset('images/' . $productImages[$index % count($productImages)]) }}" class="card-img-top" alt="{{ $producto->nombre }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ $producto->nombre }}</h5>
                             <p class="card-text">{{ $producto->descripcion }}</p>
@@ -83,10 +86,13 @@
     <section class="category-section">
         <h2 class="text-center mb-4"><i class="fas fa-list"></i> Categorías</h2>
         <div class="row">
-            @foreach($categories as $category)
+            @php
+                $categoryImages = ['categoria1.jpg', 'categoria2.jpg', 'categoria3.jpg', 'categoria4.jpg', 'categoria5.jpg', 'categoria6.jpg'];
+            @endphp
+            @foreach($categories as $index => $category)
                 <div class="col-md-4">
                     <div class="card category-card mb-4">
-                        <img src="https://via.placeholder.com/300" class="card-img-top" alt="{{ $category->nombre }}">
+                        <img src="{{ asset('images/' . $categoryImages[$index % count($categoryImages)]) }}" class="card-img-top" alt="{{ $category->nombre }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ $category->nombre }}</h5>
                             <a href="{{ route('categories.show', $category->id) }}" class="btn btn-primary btn-block">Ver Productos</a>
