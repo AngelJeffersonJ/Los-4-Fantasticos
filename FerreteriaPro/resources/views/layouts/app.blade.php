@@ -11,16 +11,42 @@
     <!-- Animate CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
+        body {
+            background-color: #e6e6e1; /* Cambia el color de fondo de toda la página */
+        }
+
+        .navbar {
+            background-color: #343a40;
+        }
+
+        .navbar-brand {
+            color: #ffc107 !important;
+        }
+
+        .navbar-nav .nav-link {
+            color: #ffc107 !important;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #fff !important;
+        }
+
         .card {
             transition: transform 0.2s ease-in-out;
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         }
 
         .card:hover {
             transform: scale(1.05);
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
         }
 
         .category-card img {
             transition: transform 0.2s ease-in-out;
+            border-radius: 10px 10px 0 0;
         }
 
         .category-card img:hover {
@@ -41,17 +67,23 @@
         }
 
         .admin-links ul li {
-            display: inline;
+            display: inline-block;
             margin-right: 10px;
+            margin-bottom: 10px;
         }
 
         .admin-links ul li a {
             color: #007bff;
             text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #e9ecef;
+            transition: background-color 0.2s ease-in-out;
         }
 
         .admin-links ul li a:hover {
-            text-decoration: underline;
+            background-color: #007bff;
+            color: #fff;
         }
 
         .carousel-item {
@@ -66,15 +98,30 @@
         footer {
             background-color: #343a40;
             color: white;
+            padding: 20px 0;
         }
 
         footer a {
             color: #ffc107;
+            text-decoration: none;
         }
 
         footer a:hover {
             color: white;
             text-decoration: underline;
+        }
+
+        footer h5 {
+            margin-bottom: 15px;
+        }
+
+        footer ul {
+            padding-left: 0;
+            list-style: none;
+        }
+
+        footer ul li {
+            margin-bottom: 10px;
         }
 
         @media (max-width: 767px) {
@@ -84,7 +131,7 @@
 
             .admin-links ul li {
                 display: block;
-                margin-bottom: 10px;
+                margin-right: 0;
             }
 
             .carousel-item {
@@ -115,7 +162,9 @@
                     <a class="nav-link" href="{{ route('catalogo.index') }}">Catálogo</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('catalogo.carrito') }}">Carrito</a>
+                    <a class="nav-link" href="{{ route('catalogo.carrito') }}">
+                        <i class="fas fa-shopping-cart"></i> Carrito
+                    </a>
                 </li>
                 @guest
                     <li class="nav-item">

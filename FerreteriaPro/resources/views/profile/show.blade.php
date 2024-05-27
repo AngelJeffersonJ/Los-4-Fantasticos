@@ -10,8 +10,8 @@
                     {{ session('success') }}
                 </div>
             @endif
-            <div class="card">
-                <div class="card-header">{{ __('Información del Perfil') }}</div>
+            <div class="card shadow-lg border-0 rounded-lg">
+                <div class="card-header bg-primary text-white">{{ __('Información del Perfil') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('user.updateProfile') }}">
@@ -69,7 +69,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary btn-block">
                                     {{ __('Actualizar Perfil') }}
                                 </button>
                             </div>
