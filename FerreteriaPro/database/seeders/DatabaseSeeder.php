@@ -16,13 +16,15 @@ class DatabaseSeeder extends Seeder
             VentaSeeder::class,
             VentaDetalleSeeder::class,
             InventarioSeeder::class,
+            RoleSeeder::class,
+            UserSeeder::class,
             CacheSeeder::class,
             CacheLockSeeder::class,
             FailedJobSeeder::class,
             JobBatchSeeder::class,
             JobSeeder::class,
             MigrationSeeder::class,
-            PasswordResetSeeder::class,
+            PasswordResetTokenSeeder::class,
             SessionSeeder::class,
         ]);
     }

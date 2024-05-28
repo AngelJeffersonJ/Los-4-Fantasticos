@@ -4,16 +4,17 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 
 class VentaDetalleSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('venta_detalles')->delete();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('venta_detalles')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         DB::table('venta_detalles')->insert([
-            ['id_venta' => 15, 'id_producto' => 2, 'cantidad' => 23, 'precio_unitario' => 33323.00, 'created_at' => Carbon::parse('2024-05-16 06:16:50'), 'updated_at' => Carbon::parse('2024-05-16 06:17:06')],
+            ['id' => 1, 'id_venta' => 15, 'id_producto' => 4, 'cantidad' => 23, 'precio_unitario' => 33323.00, 'created_at' => '2024-05-16 06:16:50', 'updated_at' => '2024-05-16 06:17:06'],
         ]);
     }
 }
