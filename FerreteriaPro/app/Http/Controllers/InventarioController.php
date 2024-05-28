@@ -5,61 +5,85 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Inventario;
 use App\Models\Producto;
+use Illuminate\Support\Facades\Auth;
 
 class InventarioController extends Controller
 {
     public function index()
     {
-        $inventarios = Inventario::all();
-        return view('inventarios.index', compact('inventarios'));
+        if (Auth::check() && Auth::user()->email === 'admin@example.com') {
+            $inventarios = Inventario::all();
+            return view('inventarios.index', compact('inventarios'));
+        }
+        return redirect()->route('errors.access_denied');
     }
 
     public function create()
     {
-        $productos = Producto::all();
-        return view('inventarios.create', compact('productos'));
+        if (Auth::check() && Auth::user()->email === 'admin@example.com') {
+            $productos = Producto::all();
+            return view('inventarios.create', compact('productos'));
+        }
+        return redirect()->route('errors.access_denied');
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'id_producto' => 'required|exists:productos,id',
-            'cantidad_disponible' => 'required|integer|min:0',
-            'cantidad_minima' => 'required|integer|min:0',
-            'cantidad_maxima' => 'required|integer|min:0',
-        ]);
+        if (Auth::check() && Auth::user()->email === 'admin@example.com') {
+            $request->validate([
+                'id_producto' => 'required|exists:productos,id',
+                'cantidad_disponible' => 'required|integer',
+                'cantidad_minima' => 'required|integer',
+                'cantidad_maxima' => 'required|integer'
+            ]);
 
-        Inventario::create($request->all());
-        return redirect()->route('inventarios.index')->with('success', 'Inventario creado exitosamente.');
+            Inventario::create($request->all());
+
+            return redirect()->route('inventarios.index')->with('success', 'Inventario creado exitosamente.');
+        }
+        return redirect()->route('errors.access_denied');
     }
 
     public function show(Inventario $inventario)
     {
-        return view('inventarios.show', compact('inventario'));
+        if (Auth::check() && Auth::user()->email === 'admin@example.com') {
+            return view('inventarios.show', compact('inventario'));
+        }
+        return redirect()->route('errors.access_denied');
     }
 
     public function edit(Inventario $inventario)
     {
-        $productos = Producto::all();
-        return view('inventarios.edit', compact('inventario', 'productos'));
+        if (Auth::check() && Auth::user()->email === 'admin@example.com') {
+            $productos = Producto::all();
+            return view('inventarios.edit', compact('inventario', 'productos'));
+        }
+        return redirect()->route('errors.access_denied');
     }
 
     public function update(Request $request, Inventario $inventario)
     {
-        $request->validate([
-            'id_producto' => 'required|exists:productos,id',
-            'cantidad_disponible' => 'required|integer|min:0',
-            'cantidad_minima' => 'required|integer|min:0',
-            'cantidad_maxima' => 'required|integer|min:0',
-        ]);
+        if (Auth::check() && Auth::user()->email === 'admin@example.com') {
+            $request->validate([
+                'id_producto' => 'required|exists:productos,id',
+                'cantidad_disponible' => 'required|integer',
+                'cantidad_minima' => 'required|integer',
+                'cantidad_maxima' => 'required|integer'
+            ]);
 
-        $inventario->update($request->all());
-        return redirect()->route('inventarios.index')->with('success', 'Inventario actualizado exitosamente.');
+            $inventario->update($request->all());
+
+            return redirect()->route('inventarios.index')->with('success', 'Inventario actualizado exitosamente.');
+        }
+        return redirect()->route('errors.access_denied');
     }
 
     public function destroy(Inventario $inventario)
     {
-        $inventario->delete();
-        return redirect()->route('inventarios.index')->with('success', 'Inventario eliminado exitosamente.');
+        if (Auth::check() && Auth::user()->email === 'admin@example.com') {
+            $inventario->delete();
+            return redirect()->route('inventarios.index')->with('success', 'Inventario eliminado exitosamente.');
+        }
+        return redirect()->route('errors.access_denied');
     }
 }
