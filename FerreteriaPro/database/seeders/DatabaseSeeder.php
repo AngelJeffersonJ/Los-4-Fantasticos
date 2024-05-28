@@ -10,10 +10,22 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             CategoriaSeeder::class,
+            ProveedorSeeder::class,
             ProductoSeeder::class,
             ClienteSeeder::class,
             VentaSeeder::class,
             VentaDetalleSeeder::class,
+            InventarioSeeder::class,
+            CacheSeeder::class,
+            CacheLockSeeder::class,
+            FailedJobSeeder::class,
+            JobBatchSeeder::class,
+            JobSeeder::class,
+            MigrationSeeder::class,
+            PasswordResetSeeder::class,
+            SessionSeeder::class,
+            RoleSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }
