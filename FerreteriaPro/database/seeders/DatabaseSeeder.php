@@ -19,11 +19,11 @@ class DatabaseSeeder extends Seeder
             VentaSeeder::class,
             VentaDetalleSeeder::class,
             InventarioSeeder::class,
-            RoleSeeder::class,
-            UserSeeder::class,
+            \Database\Seeders\OtroRoladoTableSeeder::class,
+            UsersSeeder::class,
         ]);
 
-        // Volvemos a habilitar las restricciones de claves foráneas
         \DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
     }
 }
