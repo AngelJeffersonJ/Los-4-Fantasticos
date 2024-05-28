@@ -91,3 +91,7 @@ Route::middleware('auth')->group(function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/access-denied', function () {
+    return view('errors.access_denied');
+})->name('errors.access_denied');

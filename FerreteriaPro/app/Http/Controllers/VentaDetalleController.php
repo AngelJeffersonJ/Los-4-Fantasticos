@@ -6,63 +6,87 @@ use Illuminate\Http\Request;
 use App\Models\VentaDetalle;
 use App\Models\Venta;
 use App\Models\Producto;
+use Illuminate\Support\Facades\Auth;
 
 class VentaDetalleController extends Controller
 {
     public function index()
     {
-        $ventaDetalles = VentaDetalle::all();
-        return view('venta_detalles.index', compact('ventaDetalles'));
+        if (Auth::check() && Auth::user()->email === 'admin@example.com') {
+            $ventaDetalles = VentaDetalle::all();
+            return view('venta_detalles.index', compact('ventaDetalles'));
+        }
+        return redirect()->route('errors.access_denied');
     }
 
     public function create()
     {
-        $ventas = Venta::all();
-        $productos = Producto::all();
-        return view('venta_detalles.create', compact('ventas', 'productos'));
+        if (Auth::check() && Auth::user()->email === 'admin@example.com') {
+            $ventas = Venta::all();
+            $productos = Producto::all();
+            return view('venta_detalles.create', compact('ventas', 'productos'));
+        }
+        return redirect()->route('errors.access_denied');
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'id_venta' => 'required|exists:ventas,id',
-            'id_producto' => 'required|exists:productos,id',
-            'cantidad' => 'required|integer|min:1',
-            'precio_unitario' => 'required|numeric|min:0',
-        ]);
+        if (Auth::check() && Auth::user()->email === 'admin@example.com') {
+            $request->validate([
+                'id_venta' => 'required|exists:ventas,id',
+                'id_producto' => 'required|exists:productos,id',
+                'cantidad' => 'required|integer',
+                'precio_unitario' => 'required|numeric'
+            ]);
 
-        VentaDetalle::create($request->all());
-        return redirect()->route('venta_detalles.index')->with('success', 'Detalle de venta creado exitosamente.');
+            VentaDetalle::create($request->all());
+
+            return redirect()->route('venta_detalles.index')->with('success', 'Detalle de venta creado exitosamente.');
+        }
+        return redirect()->route('errors.access_denied');
     }
 
     public function show(VentaDetalle $ventaDetalle)
     {
-        return view('venta_detalles.show', compact('ventaDetalle'));
+        if (Auth::check() && Auth::user()->email === 'admin@example.com') {
+            return view('venta_detalles.show', compact('ventaDetalle'));
+        }
+        return redirect()->route('errors.access_denied');
     }
 
     public function edit(VentaDetalle $ventaDetalle)
     {
-        $ventas = Venta::all();
-        $productos = Producto::all();
-        return view('venta_detalles.edit', compact('ventaDetalle', 'ventas', 'productos'));
+        if (Auth::check() && Auth::user()->email === 'admin@example.com') {
+            $ventas = Venta::all();
+            $productos = Producto::all();
+            return view('venta_detalles.edit', compact('ventaDetalle', 'ventas', 'productos'));
+        }
+        return redirect()->route('errors.access_denied');
     }
 
     public function update(Request $request, VentaDetalle $ventaDetalle)
     {
-        $request->validate([
-            'id_venta' => 'required|exists:ventas,id',
-            'id_producto' => 'required|exists:productos,id',
-            'cantidad' => 'required|integer|min:1',
-            'precio_unitario' => 'required|numeric|min:0',
-        ]);
+        if (Auth::check() && Auth::user()->email === 'admin@example.com') {
+            $request->validate([
+                'id_venta' => 'required|exists:ventas,id',
+                'id_producto' => 'required|exists:productos,id',
+                'cantidad' => 'required|integer',
+                'precio_unitario' => 'required|numeric'
+            ]);
 
-        $ventaDetalle->update($request->all());
-        return redirect()->route('venta_detalles.index')->with('success', 'Detalle de venta actualizado exitosamente.');
+            $ventaDetalle->update($request->all());
+
+            return redirect()->route('venta_detalles.index')->with('success', 'Detalle de venta actualizado exitosamente.');
+        }
+        return redirect()->route('errors.access_denied');
     }
 
     public function destroy(VentaDetalle $ventaDetalle)
     {
-        $ventaDetalle->delete();
-        return redirect()->route('venta_detalles.index')->with('success', 'Detalle de venta eliminado exitosamente.');
+        if (Auth::check() && Auth::user()->email === 'admin@example.com') {
+            $ventaDetalle->delete();
+            return redirect()->route('venta_detalles.index')->with('success', 'Detalle de venta eliminado exitosamente.');
+        }
+        return redirect()->route('errors.access_denied');
     }
 }
