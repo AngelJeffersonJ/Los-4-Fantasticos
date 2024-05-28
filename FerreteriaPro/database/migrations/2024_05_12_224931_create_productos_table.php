@@ -4,22 +4,19 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
+return new class extends Migration {
     public function up(): void
     {
-        Schema::create('inventarios', function (Blueprint $table) {
+        Schema::create('productos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_producto')->constrained('productos');
-            $table->integer('cantidad_disponible');
-            $table->integer('cantidad_minima');
-            $table->integer('cantidad_maxima');
+            $table->string('nombre');
+            $table->text('descripcion')->nullable();
+            $table->decimal('precio_unitario', 10, 2);
+            $table->integer('stock');
+            $table->foreignId('id_categoria')->constrained('categorias')->onDelete('cascade');
+            $table->foreignId('id_proveedor')->constrained('proveedores')->onDelete('cascade');
             $table->timestamps();
-        });        
-        
+        });
     }
 
     public function down(): void
