@@ -9,9 +9,7 @@ class VentaSeeder extends Seeder
 {
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('ventas')->truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         DB::table('ventas')->insert([
             ['id' => 15, 'fecha' => '2024-05-10', 'id_cliente' => 2, 'created_at' => '2024-05-16 00:16:15', 'updated_at' => '2024-05-20 13:46:54'],

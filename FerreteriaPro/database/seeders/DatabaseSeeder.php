@@ -8,6 +8,9 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
+        // Deshabilitamos las restricciones de claves foráneas
+        \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
         $this->call([
             CategoriaSeeder::class,
             ProveedorSeeder::class,
@@ -18,14 +21,9 @@ class DatabaseSeeder extends Seeder
             InventarioSeeder::class,
             RoleSeeder::class,
             UserSeeder::class,
-            CacheSeeder::class,
-            CacheLockSeeder::class,
-            FailedJobSeeder::class,
-            JobBatchSeeder::class,
-            JobSeeder::class,
-            MigrationSeeder::class,
-            PasswordResetTokenSeeder::class,
-            SessionSeeder::class,
         ]);
+
+        // Volvemos a habilitar las restricciones de claves foráneas
+        \DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

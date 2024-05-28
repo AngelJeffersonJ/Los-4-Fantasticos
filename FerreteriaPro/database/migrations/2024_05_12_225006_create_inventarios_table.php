@@ -4,24 +4,21 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInventariosTable extends Migration
-{
-    public function up()
+return new class extends Migration {
+    public function up(): void
     {
         Schema::create('inventarios', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_producto');
+            $table->id();
+            $table->foreignId('id_producto')->constrained('productos')->onDelete('cascade');
             $table->integer('cantidad_disponible');
             $table->integer('cantidad_minima');
             $table->integer('cantidad_maxima');
             $table->timestamps();
-
-            $table->foreign('id_producto')->references('id')->on('productos')->onDelete('cascade');
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('inventarios');
     }
-}
+};
