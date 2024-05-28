@@ -24,8 +24,6 @@ class DatabaseSeeder extends Seeder
             MigrationSeeder::class,
             PasswordResetSeeder::class,
             SessionSeeder::class,
-            RoleSeeder::class,
-            UserSeeder::class,
         ]);
     }
 }
