@@ -19,6 +19,7 @@ use App\Http\Controllers\HomeController;
 // dd('Laravel está cargando las rutas correctamente');
 
 // Rutas de Productos
+Route::get('/productos/sugerir-proveedor/{id}', [ProductoController::class, 'sugerirProveedor']);
 Route::get('/productos', [ProductoController::class, 'index'])->name('productos.index');
 Route::get('/productos/create', [ProductoController::class, 'create'])->name('productos.create');
 Route::post('/productos', [ProductoController::class, 'store'])->name('productos.store');
@@ -32,7 +33,12 @@ Route::get('/categories', [CategoryController::class, 'index'])->name('categorie
 Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 
 // Rutas de Proveedores
-Route::resource('/proveedores', ProveedorController::class);
+Route::resource('proveedores', ProveedorController::class)->parameters([
+    'proveedores' => 'proveedor'
+]);
+
+// Ruta para sugerir proveedores
+Route::post('/proveedores/sugerir', [ProveedorController::class, 'sugerirProveedor'])->name('proveedores.sugerir');
 
 // Rutas de Clientes
 Route::resource('/clientes', ClienteController::class);
