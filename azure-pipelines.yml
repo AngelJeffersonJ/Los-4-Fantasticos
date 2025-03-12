@@ -1,0 +1,51 @@
+trigger:
+  branches:
+    include:
+      - shift-141243  # Cambia a la rama que deseas usar para el despliegue
+
+pool:
+  vmImage: 'windows-latest'  # Usa una imagen de Windows
+
+variables:
+  phpVersion: '8.2'  # Especifica la versión de PHP
+
+steps:
+# Instalar PHP usando Chocolatey (alternativa a UsePHP)
+- script: |
+    choco install php --version=8.2.0 -y
+    php -v
+  displayName: 'Instalar PHP 8.2 usando Chocolatey'
+
+# Instalar dependencias de Composer y optimizar Laravel
+- script: |
+    composer install --optimize-autoloader --no-dev
+    php artisan config:cache
+    php artisan route:cache
+    php artisan view:cache
+  displayName: 'Instalar dependencias y optimizar Laravel'
+
+# Comprimir los archivos del proyecto en un ZIP
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.SourcesDirectory)'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/app.zip'
+    replaceExistingArchive: true
+
+# Publicar el archivo ZIP como un artefacto
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/app.zip'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+
+# Desplegar en Azure App Service
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'NombreDeTuConexion'  # Reemplaza con el nombre de tu conexión de servicio
+    appType: 'webApp'
+    appName: '$(appServiceName)'  # Nombre de tu App Service
+    package: '$(Build.ArtifactStagingDirectory)/app.zip'
+    runtimeStack: 'PHP|$(phpVersion)'
+    startupCommand: 'cp .env.example .env && php artisan key:generate'
