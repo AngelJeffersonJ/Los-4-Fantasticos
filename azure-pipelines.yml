@@ -1,7 +1,7 @@
 trigger:
   branches:
     include:
-      - shift-141243  # Cambia a la rama que deseas usar para el despliegue
+      - shift_141234  # Cambia a la rama que deseas usar para el despliegue
 
 pool:
   vmImage: 'windows-latest'  # Usa una imagen de Windows
@@ -43,9 +43,9 @@ steps:
 # Desplegar en Azure App Service
 - task: AzureWebApp@1
   inputs:
-    azureSubscription: 'NombreDeTuConexion'  # Reemplaza con el nombre de tu conexión de servicio
+    azureSubscription: 'MiConexionAzure'  # Reemplaza con el nombre real de tu conexión
     appType: 'webApp'
     appName: '$(appServiceName)'  # Nombre de tu App Service
     package: '$(Build.ArtifactStagingDirectory)/app.zip'
-    runtimeStack: 'PHP|$(phpVersion)'
+    runtimeStack: 'PHP|8.2'  # Usa el valor directo o la variable $(phpVersion)
     startupCommand: 'cp .env.example .env && php artisan key:generate'
