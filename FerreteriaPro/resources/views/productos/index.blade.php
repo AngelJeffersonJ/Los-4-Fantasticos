@@ -1,119 +1,89 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h1 class="mb-4">Lista de Productos</h1>
+    <div class="container mt-5">
+        <h1 class="mb-4">📦 Lista de Productos</h1>
 
-    <a href="{{ route('productos.create') }}" class="btn btn-primary mb-3">Crear Producto</a>
+        {{-- Botón para agregar un nuevo producto --}}
+        <a href="{{ route('productos.create') }}" class="btn btn-primary mb-3">Crear Producto</a>
 
-    @if($productos->isEmpty())
-        <p class="alert alert-warning">No hay productos registrados.</p>
-    @else
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Descripción</th>
-                        <th>Precio Unitario</th>
-                        <th>Stock</th>
-                        <th>Categoría</th>
-                        <th>Proveedor</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($productos as $producto)
-                        @php
-                            // Definir color del stock
-                            if ($producto->stock < 10) {
-                                $stockClass = 'badge-danger';
-                                $stockText = 'Bajo';
-                            } elseif ($producto->stock < 30) {
-                                $stockClass = 'badge-warning';
-                                $stockText = 'Medio';
-                            } else {
-                                $stockClass = 'badge-success';
-                                $stockText = 'Alto';
-                            }
-                        @endphp
+        {{-- Buscador --}}
+        <input type="text" id="search" class="form-control mb-3" placeholder="Buscar producto por cualquier campo...">
+
+        @if ($productos->isEmpty())
+            <p class="alert alert-warning">No hay productos registrados.</p>
+        @else
+            <div class="table-responsive">
+                <table class="table table-striped" id="productosTable">
+                    <thead class="thead-dark">
                         <tr>
-                            <td>{{ $producto->id }}</td>
-                            <td>{{ $producto->nombre }}</td>
-                            <td>{{ $producto->descripcion }}</td>
-                            <td>${{ number_format($producto->precio_unitario, 2) }}</td>
-                            <td>
-                                <span class="badge {{ $stockClass }}">{{ $producto->stock }} ({{ $stockText }})</span>
-                            </td>
-                            <td>{{ optional($producto->categoria)->nombre ?? 'Sin Categoría' }}</td>
-                            <td>{{ optional($producto->proveedor)->nombre ?? 'Sin Proveedor' }}</td>
-                            <td>
-                                <a href="{{ route('productos.show', $producto->id) }}" class="btn btn-info btn-sm">Ver</a>
-                                <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-primary btn-sm">Editar</a>
-
-                                <form action="{{ route('productos.destroy', $producto->id) }}" method="POST" style="display: inline-block;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar este producto?')">Eliminar</button>
-                                </form>
-
-                                {{-- Botón para sugerencia de proveedor --}}
-                                <button class="btn btn-warning btn-sm sugerir-proveedor-btn" data-id="{{ $producto->id }}">
-                                    Sugerir Proveedor
-                                </button>
-                            </td>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Precio Unitario</th>
+                            <th>Stock</th>
+                            <th>Categoría</th>
+                            <th>Proveedor</th>
+                            <th>Acciones</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    @endif
-</div>
+                    </thead>
+                    <tbody>
+                        @foreach ($productos as $producto)
+                            <tr>
+                                <td>{{ $producto->id }}</td>
+                                <td>{{ $producto->nombre }}</td>
+                                <td>{{ $producto->descripcion }}</td>
+                                <td>${{ number_format($producto->precio_unitario, 2) }}</td>
+                                <td>
+                                    @if($producto->stock <= 5)
+                                        <span class="badge badge-danger">{{ $producto->stock }} (Bajo)</span>
+                                    @else
+                                        <span class="badge badge-success">{{ $producto->stock }}</span>
+                                    @endif
+                                </td>
+                                <td>{{ $producto->categoria->nombre ?? 'N/A' }}</td>
+                                <td>{{ $producto->proveedor->nombre ?? 'N/A' }}</td>
+                                <td>
+                                    <a href="{{ route('productos.show', $producto->id) }}" class="btn btn-info btn-sm">Ver</a>
+                                    <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-primary btn-sm">Editar</a>
 
-{{-- Script para AJAX en la sugerencia de proveedor --}}
-<script>
-    document.querySelectorAll('.sugerir-proveedor-btn').forEach(button => {
-        button.addEventListener('click', async function() {
-            let productoId = this.dataset.id;
+                                    <form action="{{ route('productos.destroy', $producto->id) }}" method="POST" class="d-inline delete-form">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                    </form>
 
-            try {
-                let response = await fetch(`/productos/sugerir-proveedor/${productoId}`);
+                                    <a href="{{ route('proveedores.sugerir', ['producto_id' => $producto->id]) }}" class="btn btn-warning btn-sm">Sugerir Proveedor</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @endif
+    </div>
 
-                if (!response.ok) {
-                    throw new Error(`Error en la solicitud: ${response.status}`);
-                }
+    {{-- Script para búsqueda y confirmación de eliminación --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("search").addEventListener("keyup", function() {
+                let value = this.value.toLowerCase();
+                let rows = document.querySelectorAll("#productosTable tbody tr");
 
-                let data = await response.json();
+                rows.forEach(row => {
+                    let match = [...row.children].some(td => td.innerText.toLowerCase().includes(value));
+                    row.style.display = match ? "" : "none";
+                });
+            });
 
-                alert(`Proveedor sugerido para ${data.producto}:\n` +
-                      `- ${data.proveedor_sugerido}\n` +
-                      `- Precio: $${data.precio}\n` +
-                      `- Tiempo de entrega: ${data.tiempo_entrega} días.`);
-            } catch (error) {
-                console.error('Error:', error);
-                alert('No se pudo obtener la sugerencia del proveedor.');
-            }
+            document.querySelectorAll('.delete-form').forEach(form => {
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
+                        this.submit();
+                    }
+                });
+            });
         });
-    });
-</script>
+    </script>
 @endsection
-
-@push('styles')
-    <!-- Incluye los archivos CSS de Bootstrap -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- CSS personalizado -->
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-        .container {
-            margin-top: 50px;
-        }
-        .btn-sm {
-            font-size: 0.8rem;
-            padding: 0.25rem 0.5rem;
-        }
-    </style>
-@endpush

@@ -52,9 +52,11 @@
                 <li><a href="{{ route('proveedores.index') }}" class="btn btn-outline-primary m-1"><i class="fas fa-truck"></i> Proveedores</a></li>
                 <li><a href="{{ route('inventarios.index') }}" class="btn btn-outline-primary m-1"><i class="fas fa-warehouse"></i> Inventarios</a></li>
                 <li><a href="{{ route('clientes.index') }}" class="btn btn-outline-primary m-1"><i class="fas fa-users"></i> Clientes</a></li>
+                <li><a href="{{ route('abastecimiento.index') }}" class="btn btn-outline-warning m-1"><i class="fas fa-truck-loading"></i> Panel de Abastecimiento</a></li> <!-- 🔥 Nuevo botón agregado -->
             </ul>
         </div>
     @endif
+
     <section class="featured-section">
         <h2 class="text-center mb-4 text-success"><i class="fas fa-star"></i> Productos Destacados</h2>
         <div class="row">

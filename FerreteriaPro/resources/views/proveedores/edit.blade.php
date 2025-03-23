@@ -36,6 +36,11 @@
             </div>
 
             <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico</label>
+                <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $proveedor->email) }}" required>
+            </div>
+
+            <div class="mb-3">
                 <label for="precio" class="form-label">Precio</label>
                 <input type="number" class="form-control" id="precio" name="precio" value="{{ old('precio', $proveedor->precio) }}" step="0.01" required>
             </div>

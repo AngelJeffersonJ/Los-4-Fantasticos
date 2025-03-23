@@ -13,6 +13,7 @@ use App\Http\Controllers\CatalogoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AbastecimientoController;
 
 // ⚡ Depuración: Para verificar si Laravel está registrando rutas
 // Si necesitas hacer una prueba, descomenta esta línea
@@ -27,6 +28,12 @@ Route::get('/productos/{producto}', [ProductoController::class, 'show'])->name('
 Route::get('/productos/{producto}/edit', [ProductoController::class, 'edit'])->name('productos.edit');
 Route::put('/productos/{producto}', [ProductoController::class, 'update'])->name('productos.update');
 Route::delete('/productos/{producto}', [ProductoController::class, 'destroy'])->name('productos.destroy');
+
+// 📦 RUTAS PARA EL PANEL DE ABASTECIMIENTO
+Route::prefix('abastecimiento')->group(function () {
+    Route::get('/', [AbastecimientoController::class, 'index'])->name('abastecimiento.index');
+    Route::post('/realizar-compra', [AbastecimientoController::class, 'realizarCompra'])->name('abastecimiento.realizarCompra');
+});
 
 // Rutas de Categorías
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');

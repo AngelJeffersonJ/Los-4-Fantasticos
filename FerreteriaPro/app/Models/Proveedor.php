@@ -15,15 +15,14 @@ class Proveedor extends Model
         'nombre',
         'direccion',
         'telefono',
+        'email',
         'precio',
         'tiempo_entrega'
     ];
 
-    /**
-     * Relación con productos: Un proveedor puede tener muchos productos.
-     */
-    public function productos()
+    // Relación con ProductoProveedor
+    public function productosDisponibles()
     {
-        return $this->hasMany(Producto::class, 'id_proveedor');
+        return $this->hasMany(ProductoProveedor::class, 'id_proveedor');
     }
 }

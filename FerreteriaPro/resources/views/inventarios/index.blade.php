@@ -19,7 +19,6 @@
             @foreach ($inventarios as $inventario)
                 <tr>
                     <td>{{ $inventario->id }}</td>
-                    <td>{{ $inventario->producto->nombre }}</td>
                     <td>{{ $inventario->cantidad_disponible }}</td>
                     <td>{{ $inventario->cantidad_minima }}</td>
                     <td>{{ $inventario->cantidad_maxima }}</td>

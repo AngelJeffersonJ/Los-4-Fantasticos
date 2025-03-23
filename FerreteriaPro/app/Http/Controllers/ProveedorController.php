@@ -7,23 +7,11 @@ use App\Models\Proveedor;
 use App\Models\Producto;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SugerenciaProveedorMail;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class ProveedorController extends Controller
 {
-    public function __construct()
-    {
-        // Middleware para restringir acceso solo a administradores
-        $this->middleware(function ($request, $next) {
-            if (!Auth::check() || Auth::user()->email !== 'admin@example.com') {
-                return redirect()->route('errors.access_denied');
-            }
-            return $next($request);
-        });
-    }
-
     /**
      * 📌 Muestra la lista de proveedores con búsqueda avanzada.
      */
@@ -39,6 +27,7 @@ class ProveedorController extends Controller
                 $q->where('nombre', 'like', "%$search%")
                   ->orWhere('direccion', 'like', "%$search%")
                   ->orWhere('telefono', 'like', "%$search%")
+                  ->orWhere('email', 'like', "%$search%")
                   ->orWhere('precio', 'like', "%$search%")
                   ->orWhere('tiempo_entrega', 'like', "%$search%");
             });
@@ -66,6 +55,7 @@ class ProveedorController extends Controller
             'nombre' => 'required|string|max:255',
             'direccion' => 'required|string|max:255',
             'telefono' => 'required|string|max:20|regex:/^[0-9\-\(\)\s]+$/',
+            'email' => 'nullable|email|max:255|unique:proveedores,email',
             'precio' => 'required|numeric|min:0',
             'tiempo_entrega' => 'required|integer|min:1',
         ]);
@@ -106,6 +96,7 @@ class ProveedorController extends Controller
             'nombre' => 'required|string|max:255',
             'direccion' => 'required|string|max:255',
             'telefono' => 'required|string|max:20|regex:/^[0-9\-\(\)\s]+$/',
+            'email' => 'nullable|email|max:255|unique:proveedores,email,' . $proveedor->id,
             'precio' => 'required|numeric|min:0'
         ]);
 
@@ -150,24 +141,27 @@ class ProveedorController extends Controller
         $request->validate([
             'correo' => 'required|email'
         ]);
-    
-        // Obtener el correo desde el formulario
+
         $correoDestino = $request->correo;
-    
+
         // Obtener los mejores proveedores por precio y tiempo de entrega
         $mejoresProveedores = Proveedor::orderBy('precio', 'asc')
             ->orderBy('tiempo_entrega', 'asc')
             ->limit(5)
             ->get();
-    
+
         if ($mejoresProveedores->isEmpty()) {
             return redirect()->back()->with('error', 'No hay proveedores disponibles para sugerencias.');
         }
-    
-        // Enviar el correo con una plantilla mejorada
-        Mail::to($correoDestino)->send(new SugerenciaProveedorMail($mejoresProveedores));
-    
-        return redirect()->back()->with('success', '📩 Sugerencias enviadas correctamente a ' . $correoDestino);
+
+        try {
+            Mail::to($correoDestino)->send(new SugerenciaProveedorMail($mejoresProveedores));
+
+            return redirect()->back()->with('success', '📩 Sugerencias enviadas correctamente a ' . $correoDestino);
+
+        } catch (\Exception $e) {
+            Log::error('Error al enviar el correo: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Hubo un problema al enviar el correo.');
+        }
     }
-    
 }

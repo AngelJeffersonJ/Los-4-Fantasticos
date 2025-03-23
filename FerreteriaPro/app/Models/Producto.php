@@ -9,7 +9,7 @@ class Producto extends Model
 {
     use HasFactory;
 
-    protected $table = 'productos'; // Asegura que Laravel use la tabla correcta
+    protected $table = 'productos';
 
     protected $fillable = [
         'nombre',
@@ -17,36 +17,26 @@ class Producto extends Model
         'precio_unitario',
         'stock',
         'id_categoria',
-        'id_proveedor',
+        'id_proveedor'
     ];
 
-    // Relación con Categoría (Muchos a Uno)
     public function categoria()
     {
         return $this->belongsTo(Categoria::class, 'id_categoria');
     }
 
-    // Relación con Proveedor (Muchos a Uno)
     public function proveedor()
     {
         return $this->belongsTo(Proveedor::class, 'id_proveedor');
     }
 
-    // Simulación de estado del stock
-    public function getEstadoStockAttribute()
+    public function inventario()
     {
-        if ($this->stock < 10) {
-            return ['estado' => 'Bajo', 'class' => 'bg-danger'];
-        } elseif ($this->stock < 30) {
-            return ['estado' => 'Medio', 'class' => 'bg-warning'];
-        } else {
-            return ['estado' => 'Alto', 'class' => 'bg-success'];
-        }
+        return $this->hasOne(Inventario::class, 'id_producto');
     }
 
-    // Simulación de selección de proveedor recomendado basado en precio y tiempo de entrega
-    public function proveedorSugerido()
+    public function proveedoresDisponibles()
     {
-        return Proveedor::orderBy('precio', 'asc')->orderBy('tiempo_entrega', 'asc')->first();
+        return $this->hasMany(ProductoProveedor::class, 'id_producto');
     }
 }
