@@ -2,91 +2,100 @@
 
 @section('content')
 <div class="container mt-4">
-    <div class="card shadow-lg">
-        <div class="card-header bg-primary text-white">
+    <div class="card shadow-lg animate__animated animate__fadeIn">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
             <h1 class="my-0"><i class="fas fa-shopping-cart"></i> Carrito de Compras</h1>
+            <a href="{{ route('catalogo.index') }}" class="btn btn-warning btn-sm"><i class="fas fa-arrow-left"></i> Seguir comprando</a>
         </div>
-        <div class="card-body">
+        <div class="card-body bg-light">
             @if(session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
             @if(session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
+
             @if(!empty($carrito))
-                <table class="table table-hover">
-                    <thead class="thead-light">
+                <table class="table table-hover table-bordered">
+                    <thead class="thead-dark">
                         <tr>
-                            <th>Producto</th>
-                            <th>Cantidad</th>
-                            <th>Precio Unitario</th>
-                            <th>Subtotal</th>
+                            <th scope="col"><i class="fas fa-box-open"></i> Producto</th>
+                            <th scope="col"><i class="fas fa-sort-numeric-up"></i> Cantidad</th>
+                            <th scope="col"><i class="fas fa-euro-sign"></i> Precio Unitario</th>
+                            <th scope="col"><i class="fas fa-calculator"></i> Subtotal</th>
                         </tr>
                     </thead>
                     <tbody>
                         @php $total = 0; @endphp
                         @foreach($carrito as $id => $detalle)
-                            @php $subtotal = $detalle['precio'] * $detalle['cantidad']; $total += $subtotal; @endphp
-                            <tr>
-                                <td>{{ $detalle['nombre'] }}</td>
-                                <td>{{ $detalle['cantidad'] }}</td>
-                                <td>{{ $detalle['precio'] }} €</td>
-                                <td>{{ $subtotal }} €</td>
+                            @php
+                                $subtotal = $detalle['precio'] * $detalle['cantidad'];
+                                $total += $subtotal;
+                            @endphp
+                            <tr class="bg-white">
+                                <td class="align-middle"><strong>{{ $detalle['nombre'] }}</strong></td>
+                                <td class="align-middle">{{ $detalle['cantidad'] }}</td>
+                                <td class="align-middle">{{ number_format($detalle['precio'], 2) }} €</td>
+                                <td class="align-middle text-success"><strong>{{ number_format($subtotal, 2) }} €</strong></td>
                             </tr>
                         @endforeach
                     </tbody>
                     <tfoot>
-                        <tr>
-                            <th colspan="3" class="text-right">Total</th>
-                            <th>{{ $total }} €</th>
+                        <tr class="bg-warning text-dark font-weight-bold">
+                            <td colspan="3" class="text-right">Total:</td>
+                            <td>{{ number_format($total, 2) }} €</td>
                         </tr>
                     </tfoot>
                 </table>
-                <div class="text-right">
+
+                <div class="text-right mt-4">
                     <form action="{{ route('catalogo.comprar') }}" method="POST">
                         @csrf
-                        <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> Comprar</button>
+                        <button type="submit" class="btn btn-success btn-lg">
+                            <i class="fas fa-check-circle"></i> Confirmar y Comprar
+                        </button>
                     </form>
                 </div>
             @else
-                <p class="text-center">No hay productos en el carrito.</p>
+                <div class="alert alert-info text-center">
+                    <i class="fas fa-info-circle"></i> Tu carrito está vacío. <a href="{{ route('catalogo.index') }}">¡Explora el catálogo!</a>
+                </div>
             @endif
         </div>
     </div>
 </div>
 @endsection
 
-<style>
-    body {
-        background-color: #f8f9fa;
-    }
+@push('styles')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+@endpush
 
+<style>
     .card {
-        border-radius: 15px;
-        overflow: hidden;
+        border-radius: 20px;
     }
 
     .card-header {
-        border-bottom: none;
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        font-size: 1.2rem;
+    }
+
+    .table th, .table td {
+        vertical-align: middle !important;
     }
 
     .table-hover tbody tr:hover {
-        background-color: #f1f1f1;
-    }
-
-    .thead-light th {
-        background-color: #f8f9fa;
-        color: #343a40;
+        background-color: #eef8ff;
     }
 
     .btn-success {
-        border-radius: 10px;
+        border-radius: 12px;
+        padding: 10px 30px;
+        font-size: 1.1rem;
     }
 
-    .btn-success:hover {
-        background-color: #218838;
-        border-color: #1e7e34;
+    .btn-warning {
+        border-radius: 12px;
     }
 </style>

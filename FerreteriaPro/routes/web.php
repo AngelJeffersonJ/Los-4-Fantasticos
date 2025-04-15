@@ -14,10 +14,31 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AbastecimientoController;
-
+use App\Http\Controllers\FinanzasController;
+use App\Http\Controllers\ServicioClienteController;
+use App\Http\Controllers\GestionDocumentalController;
+use App\Http\Controllers\PedidoController;
 // ⚡ Depuración: Para verificar si Laravel está registrando rutas
 // Si necesitas hacer una prueba, descomenta esta línea
 // dd('Laravel está cargando las rutas correctamente');
+
+//Ruta principal para mostrar el panel de historial de compras del cliente
+Route::get('/pedidos', [PedidoController::class, 'index'])->name('pedidos.index');
+
+
+// Ruta principal para mostrar el panel de gestión documental
+Route::get('/gestion-documental', [App\Http\Controllers\GestionDocumentalController::class, 'index'])->name('gestion_documental.index');
+
+// Ruta principal para mostrar el panel de finanzas
+Route::get('/finanzas', [FinanzasController::class, 'index'])->name('finanzas.index');
+
+// Ruta principal para mostrar el panel de mercadotecnia
+Route::get('/mercadotecnia', [App\Http\Controllers\MercadotecniaController::class, 'index'])->name('mercadotecnia.index');
+
+// Ruta principal para mostrar el panel de servicio al cliente
+
+Route::get('/servicio-cliente', [ServicioClienteController::class, 'index'])->name('servicio_cliente.index');
+
 
 // Rutas de Productos
 Route::get('/productos/sugerir-proveedor/{id}', [ProductoController::class, 'sugerirProveedor']);
@@ -33,6 +54,8 @@ Route::delete('/productos/{producto}', [ProductoController::class, 'destroy'])->
 Route::prefix('abastecimiento')->group(function () {
     Route::get('/', [AbastecimientoController::class, 'index'])->name('abastecimiento.index');
     Route::post('/realizar-compra', [AbastecimientoController::class, 'realizarCompra'])->name('abastecimiento.realizarCompra');
+    Route::get('/abastecimiento/historial', [AbastecimientoController::class, 'historial'])->name('abastecimiento.historial');
+    Route::get('/abastecimiento/envio/{id}', [AbastecimientoController::class, 'envio'])->name('abastecimiento.envio');
 });
 
 // Rutas de Categorías

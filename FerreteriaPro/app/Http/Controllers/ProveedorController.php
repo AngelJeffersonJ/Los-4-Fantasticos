@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\SugerenciaProveedorMail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class ProveedorController extends Controller
 {
@@ -17,25 +18,29 @@ class ProveedorController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Proveedor::query();
-
-        if ($request->has('search')) {
-            $search = $request->input('search');
-
-            // 🔍 Buscar en todas las columnas relevantes
-            $query->where(function ($q) use ($search) {
-                $q->where('nombre', 'like', "%$search%")
-                  ->orWhere('direccion', 'like', "%$search%")
-                  ->orWhere('telefono', 'like', "%$search%")
-                  ->orWhere('email', 'like', "%$search%")
-                  ->orWhere('precio', 'like', "%$search%")
-                  ->orWhere('tiempo_entrega', 'like', "%$search%");
-            });
+        if (Auth::check() && Auth::user()->email === 'admin@example.com') {
+            $query = Proveedor::query();
+    
+            if ($request->has('search')) {
+                $search = $request->input('search');
+    
+                // 🔍 Buscar en todas las columnas relevantes
+                $query->where(function ($q) use ($search) {
+                    $q->where('nombre', 'like', "%$search%")
+                      ->orWhere('direccion', 'like', "%$search%")
+                      ->orWhere('telefono', 'like', "%$search%")
+                      ->orWhere('email', 'like', "%$search%")
+                      ->orWhere('precio', 'like', "%$search%")
+                      ->orWhere('tiempo_entrega', 'like', "%$search%");
+                });
+            }
+    
+            $proveedores = $query->get();
+    
+            return view('proveedores.index', compact('proveedores'));
         }
-
-        $proveedores = $query->get();
-
-        return view('proveedores.index', compact('proveedores'));
+    
+        return redirect()->route('errors.access_denied');
     }
 
     /**

@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CompraCliente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 class CatalogoController extends Controller
 {
     public function index()
     {
-        // Consulta SQL directa para obtener los productos
         $productos = DB::table('productos')
             ->leftJoin('categorias', 'productos.id_categoria', '=', 'categorias.id')
             ->leftJoin('proveedores', 'productos.id_proveedor', '=', 'proveedores.id')
@@ -28,7 +29,6 @@ class CatalogoController extends Controller
                 return (object) $producto;
             });
 
-        // Consulta SQL directa para obtener las categorías
         $categories = DB::table('categorias')->get();
 
         return view('catalogo.index', compact('productos', 'categories'));
@@ -36,7 +36,6 @@ class CatalogoController extends Controller
 
     public function show($id)
     {
-        // Consulta SQL directa para obtener un producto específico
         $producto = DB::table('productos')
             ->leftJoin('categorias', 'productos.id_categoria', '=', 'categorias.id')
             ->leftJoin('proveedores', 'productos.id_proveedor', '=', 'proveedores.id')
@@ -100,7 +99,15 @@ class CatalogoController extends Controller
 
     public function comprar()
     {
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Debes iniciar sesión para realizar una compra.');
+        }
+
         $carrito = Session::get('carrito', []);
+        if (empty($carrito)) {
+            return redirect()->route('catalogo.carrito')->with('error', 'Tu carrito está vacío.');
+        }
+
         foreach ($carrito as $id => $detalle) {
             $producto = DB::table('productos')
                 ->select('productos.*')
@@ -110,15 +117,26 @@ class CatalogoController extends Controller
             $producto = (object) $producto;
 
             if ($producto->stock >= $detalle['cantidad']) {
+                // Restar del stock
                 DB::table('productos')
                     ->where('id', $id)
                     ->decrement('stock', $detalle['cantidad']);
+
+                // Registrar la compra individualmente
+                DB::table('compras_cliente')->insert([
+                    'user_id' => Auth::id(),
+                    'producto_id' => $id,
+                    'cantidad' => $detalle['cantidad'],
+                    'total' => $detalle['precio'] * $detalle['cantidad'],
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
             } else {
                 return redirect()->route('catalogo.carrito')->with('error', 'Stock insuficiente para ' . $detalle['nombre']);
             }
         }
 
         Session::forget('carrito');
-        return redirect()->route('catalogo.index')->with('success', 'Compra realizada con éxito!');
+        return redirect()->route('catalogo.index')->with('success', '¡Compra realizada con éxito!');
     }
 }

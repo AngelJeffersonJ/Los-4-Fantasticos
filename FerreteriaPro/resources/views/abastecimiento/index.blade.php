@@ -69,6 +69,8 @@
     @else
         <div class="alert alert-info">No hay productos que necesiten abastecimiento.</div>
     @endif
+
+    <a href="{{ route('abastecimiento.historial') }}" class="btn btn-info btn-block mt-3">📜 Ver Historial de Abastecimientos</a>
 </div>
 
 @if(session('correos_enviados'))

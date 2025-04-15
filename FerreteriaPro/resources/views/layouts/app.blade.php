@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
         body {
-            background-color: #f4f4f9; /* Cambia el color de fondo de toda la página */
+            background-color: #f4f4f9;
         }
 
         .navbar {
@@ -20,7 +20,7 @@
         }
 
         .navbar-brand img {
-            height: 40px; /* Ajusta el tamaño del logo */
+            height: 40px;
             margin-right: 10px;
         }
 
@@ -177,7 +177,8 @@
         <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{ asset('images/logo.png') }}" alt="FerreteriaPro"> FerreteriaPro
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -196,11 +197,17 @@
                     </li>
                 @else
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{ Auth::user()->name }}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('user.perfil') }}">Perfil</a>
+                            <a class="dropdown-item" href="{{ route('user.perfil') }}">
+                                <i class="fas fa-user-circle"></i> Perfil
+                            </a>
+                            <a class="dropdown-item" href="{{ route('pedidos.index') }}">
+                                <i class="fas fa-box"></i> Mis Compras
+                            </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();document.getElementById('logout-form').submit();">

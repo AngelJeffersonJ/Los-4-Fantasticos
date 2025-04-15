@@ -53,6 +53,10 @@
                 <li><a href="{{ route('inventarios.index') }}" class="btn btn-outline-primary m-1"><i class="fas fa-warehouse"></i> Inventarios</a></li>
                 <li><a href="{{ route('clientes.index') }}" class="btn btn-outline-primary m-1"><i class="fas fa-users"></i> Clientes</a></li>
                 <li><a href="{{ route('abastecimiento.index') }}" class="btn btn-outline-warning m-1"><i class="fas fa-truck-loading"></i> Panel de Abastecimiento</a></li> <!-- 🔥 Nuevo botón agregado -->
+                <li><a href="{{ route('finanzas.index') }}" class="btn btn-outline-primary m-1"><i class="fas fa-chart-line"></i> Finanzas</a></li>
+                <li><a href="{{ route('mercadotecnia.index') }}" class="btn btn-outline-primary m-1"><i class="fas fa-bullhorn"></i> Mercadotecnia</a></li>
+                <li><a href="{{ route('servicio_cliente.index') }}" class="btn btn-outline-primary m-1"><i class="fas fa-headset"></i> Servicio al Cliente</a></li>
+                <li><a href="{{ route('gestion_documental.index') }}" class="btn btn-outline-primary m-1"><i class="fas fa-folder-open"></i> Gestión Documental</a></li>
             </ul>
         </div>
     @endif
